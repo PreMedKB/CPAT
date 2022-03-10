@@ -1,0 +1,9 @@
+Nucleotide change per gene from https://www.pharmvar.org	34T>G	17991G>A
+Effect on protein (NP_001073.3)	p.W12G	p.V433M
+Position at NC_000019.10 (Homo sapiens chromosome 19, GRCh38.p2)	g.15897578A>C	g.15879621C>T
+Position at NG_007971.2 (CYP4F2 RefSeqGene)	g.5497T>G	g.23454G>A
+rsID	rs3093105	rs2108622
+CYP4F2 Allele		
+*1	A	C
+*2	C	
+*3		T

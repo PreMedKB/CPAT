@@ -1,0 +1,31 @@
+NG_007929.1 (ATG start)																								
+Effect on protein (NP_000758.1)	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
+Position at NC_000019.10 (Homo sapiens chromosome 7, GRCh38.p13)	g.99768360A>G	g.99760901A>G	g.99770202T>C	g.99768371G>C	g.99766412_99766413insT	g.99778079C>T	g.99770165C>T 	g.99769781C>T 	g.99769769C>G	g.99762206G>A	g.99762177G>A	g.99762047G>A	g.99784038A>G	g.99769804C>T	g.99768470G>C	g.99768458A>G	g.99764003A>G	g.99760836G>A	g.99758188_99758189insT	g.99763925T>C	g.99768693G>A	g.99769805G>A	g.99768424T>A	g.99766440G>A
+Position at NG_007929.1 (CYP3A4 RefSeqGene; forward relative to chromosome)	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
+rsID	rs55785340	rs4986910	rs55951658	rs55901263	rs4646438	rs56324128	rs72552799	rs72552798	rs4986908	rs67784355	rs12721629	rs4986909	rs12721634	rs4986907	rs12721627	rs4987161	rs28371759	rs4986913	rs67666821	rs201821708	rs35599367	rs57409622	rs113667357	rs138105638
+CYP3A4 Allele																								
+*1	A	A	T	G	-	C	C	C	C	G	G	G	A	C	G	A	A	G	-	T	G	G	T	G
+*2	G																							
+*3		G																						
+*4			C																					
+*5				C																				
+*6					A																			
+*7						T																		
+*8							T																	
+*9								T																
+*10									G															
+*11										A														
+*12											A													
+*13												A												
+*14													G											
+*15														T										
+*16															C									
+*17																G								
+*18																	G							
+*19																		A						
+*20																			T					
+*21																				C				
+*22																					A			
+*23																						A		
+*24																							A	
+*26																								A

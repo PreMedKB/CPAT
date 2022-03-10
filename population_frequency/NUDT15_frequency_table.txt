@@ -1,0 +1,21 @@
+NUDT15 allele	African American/Afro-Caribbean	American	Central/South Asian	East Asian	European	Latino	Near Eastern	Oceanian	Sub-Saharan African
+*1			0.9992	0.9951	0.9996	0.9946			
+*2			0.0000	0.0350	0.0000	0.0365			
+*3			0.0670	0.0605	0.0020	0.0075			
+*4			0.0000	0.0011	0.0000	0.0179			
+*5			0.0004	0.0111	0.0000	0.0000			
+*6			0.0020	0.0130	0.0030	0.0015			
+*7			0.0000	0.0006	0.0000	0.0000			
+*8									
+*9			0.0005	0.0000	0.0018	0.0003			
+*10									
+*11									
+*12									
+*13									
+*14									
+*15									
+*16									
+*17									
+*18									
+*19									
+*20									

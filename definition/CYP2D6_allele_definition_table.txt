@@ -1,0 +1,147 @@
+Nucleotide change per gene from https://www.pharmvar.org	1750A>G	1759G>A; 1759G>T	1847G>A	1864_1865insTTTCGCCCCTTTCGCCCC; 1864_1865insTTTCGCCCC	1914G>T	1979C>T	2441G>A	64delC	137_138insT	993C>G	1708delT	1977_1978insG	1996delC	2540delAACT	2550delA	2580_2581insC	2590delCTGA	2616delAAG	2829delC	2928delGATCCTACATCCGGATGTG	3810delTC	4135_4136insTGCCCACTG	2819A>G	983A>G	1022C>A; 1022C>T	1721A>C; 1721A>T	1888_1889insTA	2870T>C	1609G>A	14C>T	19G>A	73C>T	77G>A	82C>T	100C>T	124G>A	125G>A	882G>C	886C>T	905T>G	956C>T	965G>C	971C>T	973C>A	1012G>A	1013T>C	1021A>T	1027A>G	1033G>A	1612T>A	1618G>T	1626T>G	1637G>A	1658C>T	1660G>A	1662G>C	1679T>C	1694A>G	1705C>G	1717G>A	1736G>C	1755C>A	1756T>G	3878G>A	3335G>A	3836A>C	3269T>C	3896C>T	3278T>C	3915C>T	4040G>A	4043G>A	4045C>T	4046G>A	3280G>A	3319G>A	4057G>A	4073G>A	4095C>A	4111C>G	4129C>G	4132A>G	4145G>A	4156C>T	4157A>C	4158T>G	4159G>C	4165T>G	4168G>A	4169C>G	4181G>C	4187C>T	4214G>A	1913T>C	1944G>A	1980T>C	2463C>T	2467T>C	2484G>T	2520A>C	2557C>T	2575C>A	2580C>T	2607G>A	2611T>A	2851C>T	2854A>C	2893A>G	2936A>C	2940G>A	2951G>C	2989G>A	3161G>C	3173A>C	3181G>A	3182A>G	3184G>A	3190G>A	3199C>G	3202C>T	3203G>A	3227A>G	3236A>G	3261_3262insGT	3266G>A	3854G>A	3866C>T	31G>A
+Effect on protein (NP_000097.3)	p.N166D	p.G169R; p.G169X	splicing defect	p.174_175insFRPx2; p.174_175insFRP	p.C191F		splicing defect	p.L22X	p.L47fs	p.D97E	p.W152fs	p.L213fs	p.L220fs	p.T256fs	p.R259fs	p.R269fs	p.T272fs	p.K281del	p.S288fs	p.M321fs	p.L395fs	p.468_470dupVPT	p.N285S	p.H94R	p.Y107I; p.T107N	p.E156A; p.E156V	p.S183X	p.L302P	p.V119M	p.A5V	p.V7M	p.R25W	p.R26H	p.R28C	p.P34S	p.G42R	p.G42E	splicing defect	p.R62W	p.V68G	p.A85V	p.R88P	p.A90V	p.L91M	p.V104M	p.V104A	p.T107S	p.I109V	p.G111S	p.F120I	p.A122S	p.Y124X	p.W128X	p.S135F	p.V136M		p.L142S	p.K147R	p.Q151E	p.E155K	p.C161S	p.H167Q	p.S168A	p.E418K	p.R388H	p.K404Q	p.F366S	p.Q424X	p.I369T	p.P430L	p.G439D	p.R440H	p.R441C	p.R441H	p.V370I	p.E383K	p.G445R	p.R450H	p.F457L	p.H463D	p.P469A	p.T470A	p.R474Q	p.H478Y	p.H478P	p.H478Q	p.G479R	p.F481V	p.A482T	p.A482G	p.S486T	p.S488F	p.R497H	p.C191R	p.R201H	p.L213P	p.L230F	p.L231P	p.A237S	p.T249P	p.T261I	p.P267H	p.R269X	p.E278K	p.M279K	p.R296C	p.I297L	p.T310A	p.H324P	splicing defect	splicing defect	splicing defect	p.R330P	p.E334A	p.D337N	p.D337G	p.V338M	p.G340R	p.R343G	p.R344X	p.R344Q	p.H352R	p.Y355C	p.Q364fs	p.R365H	p.E410K	p.R414C	p.V11M
+"Position at NC_000022.11 (Homo sapiens chromosome 22, GRCh38.p2)"	g.42129042T>C	g.42129033C>T; g.42129033C>A	g.42128945C>T	g.42128934AAAGGGGCG[3]; g.42128934_42128942dup	g.42128878C>A	g.42128813G>A	g.42128351C>T	g.42130729del	g.42130655dup	g.42129799G>C	g.42129084del	g.42128817dup	g.42128796del	g.42128251_42128254del	g.42128242del	g.42128218dup	g.42128199TCAG[1]	g.42128176_42128178del	g.42127963del	g.42127846_42127864del	g.42126982_42126983del	g.42126658_42126666dup	g.42127973T>C	g.42129809T>C	g.42129770G>T; g.42129770G>A	g.42129071T>G; g.42129071T>A	g.42128903_42128904insTA	g.42127922A>G	g.42129183C>T	g.42130778G>A	g.42130773C>T	g.42130719G>A	g.42130715C>T	g.42130710G>A	g.42130692G>A	g.42130668C>T	g.42130667C>T	g.42129910C>G	g.42129906G>A	g.42129887A>C	g.42129836G>A	g.42129827C>G	g.42129821G>A	g.42129819G>T	g.42129780C>T	g.42129779A>G	g.42129771T>A	g.42129765T>C	g.42129759C>T	g.42129180A>T	g.42129174C>A	g.42129166A>C	g.42129155C>T	g.42129134G>A	g.42129132C>T	g.42129130C>G	g.42129113A>G	g.42129098T>C	g.42129087G>C	g.42129075C>T	g.42129056C>G	g.42129037G>T	g.42129036A>C	g.42126914C>T	g.42127457C>T	g.42126956T>G	g.42127523A>G	g.42126896G>A	g.42127514A>G	g.42126877G>A	g.42126752C>T	g.42126749C>T	g.42126747G>A	g.42126746C>T	g.42127512C>T	g.42127473C>T	g.42126735C>T	g.42126719C>T	g.42126697G>T	g.42126681G>C	g.42126663G>C	g.42126660T>C	g.42126647C>T	g.42126636G>A	g.42126635T>G	g.42126634A>C	g.42126633C>G	g.42126627A>C	g.42126624C>T	g.42126623G>C	g.42126611C>G	g.42126605G>A	g.42126578C>T	g.42128879A>G	g.42128848C>T	g.42128812A>G	g.42128329G>A	g.42128325A>G	g.42128308C>A	g.42128272T>G	g.42128235G>A	g.42128217G>T	g.42128212G>A	g.42128185C>T	g.42128181A>T	g.42127941G>A	g.42127938T>G	g.42127899T>C	g.42127856T>G	g.42127852C>T	g.42127841C>G	g.42127803C>T	g.42127631C>G	g.42127619T>G	g.42127611C>T	g.42127610T>C	g.42127608C>T	g.42127602C>T	g.42127593G>C	g.42127590G>A	g.42127589C>T	g.42127565T>C	g.42127556T>C	g.42127530_42127531insAC	g.42127526C>T	g.42126938C>T	g.42126926G>A	g.42130761C>T
+Position at NG_008376.4 (CYP2D6 RefSeqGene)	g.6769A>G	g.6778G>A; g.6778G>T	g.6866G>A	g.6875TTTCGCCCC[3]; g.6875_6883dup	g.6933G>T	g.6998C>T	g.7460G>A	g.5083del	g.5156dup	g.6012C>G	g.6727del	g.6996dup	g.7015del	g.7559_7562del	g.7569del	g.7599dup	g.7605CTGA[1]	g.7635_7637del	g.7848del	g.7947_7965del	g.8829_8830del	g.9146_9154dup	g.7838A>G	g.6002A>G	g.6041C>A; g.6041C>T	g.6740A>C; g.6740A>T	g.6907_6908insTA	g.7889T>C	g.6628G>A	g.5033C>T	g.5038G>A	g.5092C>T	g.5096G>A	g.5101C>T	g.5119C>T	g.5143G>A	g.5144G>A	g.5901G>C	g.5905C>T	g.5924T>G	g.5975C>T	g.5984G>C	g.5990C>T	g.5992C>A	g.6031G>A	g.6032T>C	g.6040A>T	g.6046A>G	g.6052G>A	g.6631T>A	g.6637G>T	g.6645T>G	g.6656G>A	g.6677C>T	g.6679G>A	g.6681G>C	g.6698T>C	g.6713A>G	g.6724C>G	g.6736G>A	g.6755G>C	g.6774C>A	g.6775T>G	g.8897G>A	g.8354G>A	g.8855A>C	g.8288T>C	g.8915C>T	g.8297T>C	g.8934C>T	g.9059G>A	g.9062G>A	g.9064C>T	g.9065G>A	g.8299G>A	g.8338G>A	g.9076G>A	g.9092G>A	g.9114C>A	g.9130C>G	g.9148C>G	g.9151A>G	g.9164G>A	g.9175C>T	g.9176A>C	g.9177T>G	g.9178G>C	g.9184T>G	g.9187G>A	g.9188C>G	g.9200G>C	g.9206C>T	g.9233G>A	g.6932T>C	g.6963G>A	g.6999T>C	g.7482C>T	g.7486T>C	g.7503G>T	g.7539A>C	g.7576C>T	g.7594C>A	g.7599C>T	g.7626G>A	g.7630T>A	g.7870C>T	g.7873A>C	g.7912A>G	g.7955A>C	g.7959G>A	g.7970G>C	g.8008G>A	g.8180G>C	g.8192A>C	g.8200G>A	g.8201A>G	g.8203G>A	g.8209G>A	g.8218C>G	g.8221C>T	g.8222G>A	g.8246A>G	g.8255A>G	g.8280_8281insGT	g.8285G>A	g.8873G>A	g.8885C>T	g.5050G>A
+rsID	rs1135824	rs5030865	rs3892097	rs72549356		rs150163869	rs377725912		rs774671100	rs76802407	rs5030655	rs72549354		rs72549353	rs35742686	rs72549352	rs72549351	rs5030656	rs267608279	rs730882170	rs757396767	rs765776661	rs1135829	rs28371704	rs28371706	rs267608302		rs1406719554	rs374616348	rs773790593	rs72549358	rs267608313	rs28371696	rs138100349	rs1065852	rs5030862	rs118203758	rs201377835	rs267608311	rs1456026511	rs267608310	rs267608276	rs267608309	rs28371703	rs267608308	rs76187628	rs74802369	rs78459009	rs535642512	rs1135822	rs1135823	rs766391487	rs1180015037	rs781457579	rs61736512	rs1058164	rs375135093	rs569229126	rs78482768	rs28371710		rs1135825	rs1135826	rs28371733	rs77312092	rs1931013246	rs1555888910	rs763964554		rs3021084	rs569439709	rs267608319	rs730882251	rs532668079	rs61745683	rs75386357	rs751092905	rs369177208			rs1135833	rs1135835	rs141756339	rs28371735	rs766507177				rs74478221	rs75467367	rs1135840	rs568495591	rs1440526469		rs745365204	rs199535154	rs373813287	rs17002853	rs28371717		rs267608297	rs148769737	rs367543000	rs77913725	rs1135828	rs16947	rs949717872		rs5030867	rs79292917	rs72549349	rs28371725	rs141009491	rs72549348	rs78209835	rs748712690	rs59421388		rs267608295	rs72549347	rs76088846	rs61736517	rs202102799	rs72549346	rs1058172	rs769157652	rs747089665	rs769258
+CYP2D6 Allele																																																																																																																																
+*1	T	C	C	AAAGGGGCG	C	R	C	G	A	G	A	C	G	TTAG	T	G	TCAG(2)	TCT	G	CACATCCGGATGTAGGATC	AG	AGTGGGCAC	T	T	G	T	del	A	C	G	C	G	C	G	G	C	C	C	G	A	G	C	G	G	C	A	T	T	C	A	C	A	C	G	C	S	A	T	G	C	C	G	A	C	C	T	A	G	A	G	C	C	G	C	C	C	C	C	G	G	G	T	C	G	T	A	C	A	C	G	C	G	C	A	C	A	G	A	C	T	G	G	G	C	A	G	T	T	T	C	C	C	C	T	C	T	C	C	G	G	C	T	T	del	C	C	G	C
+*2																																																								S																																			G															A																						
+*3	Y														delT																																																																																																																	
+*4			T																					Y											R									K												S																									S	Y		R	K		S	M	Y	S	S															R																			Y			
+*5																																																																																																																																
+*6											delA																																																																																S																																					
+*7																																																																																																													G																			
+*8		A																																																						G																																			G															A																						
+*9																		delTCT																																																																																																														
+*10																																			A																					G																																			G																																					
+*11																																						G																		G																																			G															A																						
+*12																																				T																				S				Y																															G															A																						
+*13																																																																																																																																
+*14		T																																																						G																																			G															A																						
+*15									AA																								Y																																																																																															
+*17																									A																															G																																			G															A																						
+*18																						AGTGGGCACAGTGGGCAC																																																																																																										
+*19														delTTAG																																										G																																			G															A																						
+*20						A						CC																																												G																																			G					G										A																						
+*21																GG																																								G																																			G															A																						
+*22																																		A																																																																																														
+*23																																									A																																																																																							
+*24																																																																																																											G																					
+*25																																																																																																																							C									
+*26																																																																					G																																																											
+*27																																																																																																																														T		
+*28																															T																									G			C																																G															A																						
+*29																																																							T	G																																			G															A											T											
+*30				AAAGGGGCG(2)																																																				G																																			G															A																						
+*31																																																								G																T																			G															A																						
+*32																																																								G																																			G															A						T														T		
+*33																																																																																																			A																													
+*34																																																																																																										A																						
+*35																																																								G																																			G															A																						T
+*36																																			A															W	M					G																									C	C		A	G		G	C	T	C	G																																					
+*37																																			A																					G																																			G				T																																	
+*38																	TCAG(1)																																																																																																															
+*39																																																								S																																			G																																					
+*40				AAAGGGGCG(3)																					A																															G																																			G															A																						
+*41																																																								G																																			G															A						T																
+*42																																																								G																																			G															A																		insAC				
+*43																																	T																																																																																															
+*44																																		A																																																																													G																	
+*45																																																								G				T																															G															A																						
+*46																																	T																							G				T																															G															A																						
+*47																																A			A																					G																																			G																																					
+*48																																											A																																																																																					
+*49																																			A															T						G																																			G																																					
+*50																										G																																																																																																						
+*51																																																								G																																			G															A								G														
+*52																																			A																					G								T																											G																																					
+*53																																																		T	A																																																																													
+*54																																			A																					G																																			G										A																											
+*55																																																								G										G																									G															A																						
+*56																																			R																					G																																			G															R														A								
+*57																																			A				A																	G																									C	C		A	G		G	C	T	C	G																																					
+*58				AAAGGGGCG(2)																					A																															G																																			G															A																						
+*59																																																								G																																			G															A				T																		
+*60																											insTA																																																																																																					
+*61																																																																																																																																
+*62																																																																									A																																																							
+*63																																																																																																																																
+*64																									A										A																					G																																			G																																					
+*65																																			A																					G																																			G															A																						
+*68																																																																																																																																
+*69																																			A																					G																																			G															A						T																
+*70																													T																										T	G																																			G																										T											
+*71																																					T																																																																																											
+*72																																			A																					G																				T															G																																					
+*73																																													T											G																																			G															A																						
+*74																																												T																																																																																				
+*75																																																																										T																																																						
+*81																																																																																																							A	T	T																							
+*82																								C	T																			T		G	A	C																																																																																
+*83																																																																																	C	C		A	G		G	C	T	C	G																																					
+*84																																																								G																																			G											T				A																						
+*85																																																								G																														C					G															A																						
+*86																																																																																																								T	T																							
+*87																														A					A																					G																																			G																																					
+*88																																														G										G																																			G																																					
+*89																																																									G																																																																							
+*90																																																										C																																																																						
+*91																																																													G																																													A						T																
+*92													delG																																																																																																																			
+*93																																																																																																				G																												
+*94																																			A																					G																																			G																									C												
+*95																																			A																					G									T																										G																																					
+*96																																																																				A																																																												
+*97																																																																															T																																																	
+*98																																																								G																								C											G															A																						
+*99																																			A							G														G																																			G																																					
+*100																			delG																A																					G																																			G																																					
+*101																				delCACATCCGGATGTAGGATC															A																					G																																			G																																					
+*102																																											A													G																																			G															A																						
+*103	C																																										A													G																																			G															A																						
+*104																										A																														G																																			G															A																						
+*105																																																								G											G																								G															A																						
+*106																																																																T																																																																
+*107																																																							T																																																																									
+*108																																																																																																																										C	C					
+*109																		delTCT																																																																																																			T											
+*110																																																																													T																																																			
+*111																																																	T							G																																			G															A																						
+*112																																																																																												A																																				
+*113																																																																							T																																																									
+*114		T																																	A																																																								G															A																						
+*115																		delTCT					C																																																																																																									
+*116																																																																																																																	G															
+*117																																																								G																																			G															A									T													
+*118																																																																																																												C																				
+*119																																																																																																																T																
+*120								delG																																																																																																																								
+*121	C																																																							G						T	C																												G															A																						
+*122																																																																											T																																																					
+*123																												G																												G																																			G															A						T																
+*124						R															delAG																																																																																																											
+*125																																																								G																						T													G															A																						
+*126																																																						A		G																																			G															A																						
+*127																																																																																																																											C		T			
+*128																																								C																G																																			G															A																						
+*129																																																					T			G																																			G															A																						
+*130					A																																																																																									G																																		
+*131																																																																																																		G																														
+*132																							C												A																					G																																			G																																					
+*133																																																								G																																			G															A												T										
+*134																																																																																																																									T							
+*135																																																								G																																			G															A																					A	
+*136																																																								G														A																					G															A																						
+*137																																																																																													T																																			
+*138																																																								G																											T								G															A						T																
+*139																																																																																																																													T			
+*140																																																																																																	A																															
+*141																									A																															G																									C	C		A	G		G	C	T	C	G															A																				T		
+*142																																		A	A																					G																																			G																																					
+*143																																																				C																																																																												T
+*144							T																																																																																																																									
+*145				AAAGGGGCG(2)																																																																																																																												
+*146																																	T																																																										G															A																						
+*147				AAAGGGGCG(3)																															A																					G																																			G																																					
+*148																																	T																							G																																			G															A																				T		
+*149										C																																													T	G																																			G															A											T											

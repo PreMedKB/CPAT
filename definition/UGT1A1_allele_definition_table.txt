@@ -1,0 +1,15 @@
+Nucleotide change on cDNA (NM_000540.2)	CA(TA)5TAA CA(TA)6TAA CA(TA)7TAA CA(TA)8TAA	-364C>T	211G>A	686C>A
+Effect on protein (NP_000454.1)	5' Flanking	5' Flanking	p.G71R	p.P229Q
+Position at NC_000002.12 (Homo sapiens chromosome 2, GRCh38.p2)	g.233760235TA[6]; g.233760235TA[7]; g.233760235TA[8]; g.233760235TA[9]	g.233759924C>T	g.233760498G>A	g.233760973C>A
+Position at NG_002601.2 (UGT1A1 RefSeqGene)	g.175492TA[6]; g.175492TA[7]; g.175492TA[8]; g.175492TA[9]	g.175181C>T	g.175755G>A	g.176230C>A
+rsID	rs3064744	rs887829	rs4148323	rs35350960
+UGT1A1 Allele				
+*1	TA(7)	C	G	C
+*6			A	
+*27				A
+*28	TA(8)			
+*36	TA(6)			
+*37	TA(9)			
+*80		T		
+*80+*28	TA(8)	T		
+*80+*37	TA(9)	T		

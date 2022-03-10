@@ -1,0 +1,26 @@
+Nucleotide change per gene from https://www.pharmvar.org	80_81insCGGG	50delGAGTCG; 55_56insGAGTCG	3236delA	3358_3359insG	101G>C	2T>C	3G>C	52G>A	103A>G	139G>A	156C>G	3367G>T	7944C>G	7973C>T	7974G>A	8025T>A	88C>T
+Effect on protein (NP_060753.1)	p.C28fs	p.del17_18GV; p.V18_V19insGV	p.N74fs	p.E115fs	p.R34T	p.M1T	p.M1I	p.V18I	p.K35E	p.G47R	p.F52L	p.E118X	p.P129R	p.R139C	p.R139H	p.L156Q	p.L30V
+Position at NC_000013.11 (Homo sapiens chromosome 13, GRCh38.p2)	g.48037826_48037827insCGGG	g.48037784GAGTCG[2]; g.48037784GAGTCG[4]	g.48040982del	g.48041104dup	g.48037847G>C	g.48037748T>C	g.48037749G>C	g.48037798G>A	g.48037849A>G	g.48037885G>A	g.48037902C>G	g.48041113G>T	g.48045690C>G	g.48045719C>T	g.48045720G>A	g.48045771T>A	g.48037834C>T
+Position at NG_047021.1 (NUDT15 RefSeqGene)	g.5260_5261insCGGG	g.5218GAGTCG[2]; g.5218GAGTCG[4]	g.8416del	g.8538dup	g.5281G>C	g.5182T>C	g.5183G>C	g.5232G>A	g.5283A>G	g.5319G>A	g.5336C>G	g.8547G>T	g.13124C>G	g.13153C>T	g.13154G>A	g.13205T>A	g.5268C>T
+rsID	rs777311140	rs746071566	rs1457579126	rs761191455	rs766023281	rs769369441		rs186364861		rs1950545307	rs149436418	rs1368252918	rs768324690	rs116855232	rs147390019	rs139551410	rs1202487323
+NUDT15 Allele																	
+*1	del	GAGTCG(3)	A	G	G	T	G	G	A	G	C	G	C	C	G	T	C
+*2		GAGTCG(4)												T			
+*3														T			
+*4															A		
+*5								A									
+*6		GAGTCG(4)															
+*7					C												
+*8									G								
+*9		GAGTCG(2)															
+*10						C											
+*11										A							
+*12											G						
+*13				GG													
+*14	insCGGG																
+*15																A	
+*16																	T
+*17												T					
+*18			delA														
+*19							C										
+*20													G				

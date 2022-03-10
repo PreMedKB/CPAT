@@ -1,0 +1,46 @@
+Legacy Name/Class	E56K	P67L	R74W	D110E	D110H	R117C	R117H/ Class: IV	G178R	E193K	711+3A->G	L206W	R347H/ Class:  IV	R352Q	A455E/ Class: V	S549N	S549R(A>C)	S549R(T>G)	G551S	G551D/Class: III	D579G	E831X	2789+5G->A/ Class: V	S945L	S977F	3272-26A->G	F1052V	K1060T	A1067T	G1069R	R1070Q	R1070W	F1074L	D1152H	3849+10kbC- >T/ Class: V	G1244E	S1251N	S1255P	D1270N	G1349D
+Effect on protein (NP_000483.3)	p.E56K	p.P67L	p.R74W	p.D110E	p.D110H	p.R117C	p.R117H	p.G178R	p.E193K	Intronic	p.L206W	p.R347H	p.R352Q	p.A455E	p.S549N	p.S549R	p.S549R	p.G551S	p.G551D	p.D579G	p.E831X	Intronic	p.S945L	p.S977F	Intronic	p.F1052V	p.K1060T	p.A1067T	p.G1069R	p.R1070Q	p.R1070W	p.F1074L	p.D1152H	Intronic	p.G1244E	p.S1251N	p.S1255P	p.D1270N	p.G1349D
+Position at NC_000007.14 (Homo sapiens chromosome 7, GRCh38.p13)	g.117509035G>A	g.117509069C>T	g.117509089C>T	g.117530955C>A	g.117530953G>C	g.117530974C>T	g.117530975G>A	g.117534318G>A	g.117534363G>A	g.117534368A>G	g.117535285T>G	g.117540270G>A	g.117540285G>A	g.117548795C>A	g.117587800G>A	g.117587799A>C	g.117587801T>G	g.117587805G>A	g.117587806G>A	g.117590409A>G	g.117594930G>T	g.117602868G>A	g.117603708C>T	g.117606695C>T	g.117611555A>G	g.117611595T>G	g.117611620A>C	g.117611640G>A	g.117611646G>A	g.117611650G>A	g.117611649C>T	g.117611663T>A	g.117614699G>C	g.117639961C>T	g.117642451G>A	g.117642472G>A	g.117642483T>C	g.117642528G>A	g.117664770G>A
+Position at NG_016465.4 (CFTR RefSeqGene; forward relative to chromosome)	g.48252G>A	g.48286C>T	g.48306C>T	g.70172C>A	g.70170G>C	g.70191C>T	g.70192G>A	g.73535G>A	g.73580G>A	g.73585A>G	g.74502T>G	g.79487G>A	g.79502G>A	g.88012C>A	g.127017G>A	g.127016A>C	g.127018T>G	g.127022G>A	g.127023G>A	g.129626A>G	g.134147G>T	g.142085G>A	g.142925C>T	g.145912C>T	g.150772A>G	g.150812T>G	g.150837A>C	g.150857G>A	g.150863G>A	g.150867G>A	g.150866C>T	g.150880T>A	g.153916G>C	g.179178C>T	g.181668G>A	g.181689G>A	g.181700T>C	g.181745G>A	g.203987G>A
+rsID	rs397508256	rs368505753	rs115545701	rs397508537	rs113993958	rs77834169	rs78655421	rs80282562	rs397508759	rs397508761	rs121908752	rs77932196	rs121908753	rs74551128	rs121908755	rs121908757	rs121909005	rs121909013	rs75527207	rs397508288	rs397508387	rs80224560	rs397508442	rs141033578	rs76151804	rs150212784	rs397508513	rs121909020	rs200321110	rs78769542	rs202179988	rs186045772	rs75541969	rs75039782	rs267606723	rs74503330	rs121909041	rs11971167	rs193922525
+CFTR Allele																																							
+ivacaftor non-responsive CFTR sequence	G	C	C	C	G	C	G	G	G	A	T	G	G	C	G	A	T	G	G	A	G	G	C	C	A	T	A	G	G	G	C	T	G	C	G	G	T	G	G
+E56K	A																																						
+P67L		T																																					
+R74W			T																																				
+D110E				A																																			
+D110H					C																																		
+R117C						T																																	
+R117H							A																																
+G178R								A																															
+E193K									A																														
+711+3A->G										G																													
+L206W											G																												
+R347H												A																											
+R352Q													A																										
+A455E														A																									
+S549N															A																								
+S549R(A>C)																C																							
+S549R(T>G)																	G																						
+G551S																		A																					
+G551D																			A																				
+D579G																				G																			
+E831X																					T																		
+2789+5G->A																						A																	
+S945L																							T																
+S977F																								T															
+3272-26A->G																									G														
+F1052V																										G													
+K1060T																											C												
+A1067T																												A											
+G1069R																													A										
+R1070Q																														A									
+R1070W																															T								
+F1074L																																A							
+D1152H																																	C						
+3849+10kbC->T																																		T					
+G1244E																																			A				
+S1251N																																				A			
+S1255P																																					C		
+D1270N																																						A	
+G1349D																																							A

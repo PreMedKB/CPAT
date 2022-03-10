@@ -1,0 +1,89 @@
+Nucleotide change on cDNA (NM_000110.4)	c.299_302del	c.1898del	c.632A>G	c.703C>T	c.775A>G	c.868A>G	c.929T>C	c.934C>T	c.967G>A	c.1003G>T	c.1260T>A	c.1990G>T	c.1057C>T	c.1108A>G	c.498G>A	c.525G>A	c.1129-5923C>G	c.557A>G	c.1156G>T	c.1181G>T	c.1218G>A	c.1236G>A	c.85T>C	c.1278G>T	c.1294G>A	c.1314T>G	c.1349C>T	c.1358C>G	c.1371C>T	c.1403C>A	c.1543G>A	c.1475C>T	c.1484A>G	c.1519G>A	c.1577C>G	c.1601G>A	c.1615G>A	c.1627A>G	c.1679T>G	c.1682G>T	c.1774C>T	c.1775G>A	c.1777G>A	c.1796T>C	c.1905C>G	c.1905+1G>A	c.1906A>C	c.2021G>A	c.2161G>A	c.2186C>T	c.2194G>A	c.2195T>G	c.2279C>T	c.2303C>A	c.2336C>A	c.2482G>A	c.2582A>G	c.2623A>C	c.2977C>T	c.313G>A	c.2978T>G	c.2983G>T	c.3049G>A	c.3061G>C	c.3067C>A	c.46C>G	c.61C>T	c.62G>A	c.343A>G	c.451A>G	c.496A>G	c.1024G>A	c.2933A>G	c.1896T>C	c.2639G>T	c.2656C>T	c.2657G>A	c.601A>C	c.1180C>T	c.2846A>T	c.2872A>G	c.2915A>G	c.2921A>T
+Effect on protein (NP_000101.2)		p.P633Qfs	p.Y211C	p.R235W	p.K259E	p.K290E	p.L310S	p.L312F	p.A323T	p.V335L	p.N420K	p.A664S	p.R353C	p.I370V	p.M166I	p.S175S		p.Y186C	p.E386X	p.R394L	p.M406I		p.C29R	p.M426I	p.D432N	p.F438L	p.A450V	p.P453R	p.N457N	p.T468N	p.V515I	p.S492L	p.D495G	p.V507I	p.T526S	p.S534N	p.G539R	p.I543V	p.I560S	p.R561L	p.R592W	p.R592Q	p.G593R	p.M599T	p.N635K	splicing defect	p.I636L	p.G674D	p.A721T	p.A729V	p.V732I	p.V732G	p.T760I	p.T768K	p.T779N	p.E828K	p.K861R	p.K875Q	p.L993F	p.A105T	p.L993R	p.V995F	p.V1017I	p.V1021L	p.P1023T	p.L16V	p.R21X	p.R21Q	p.M115V	p.N151D	p.M166V	p.D342N	p.H978R	p.F632F	p.G880V	p.R886C	p.R886H	p.S201R	p.R394W	p.D949V	p.K958E	p.Q972R	p.D974V
+Position at NC_000001.11 (Homo sapiens chromosome 1, GRCh38.p2)	g.97740411ATGA[1]	g.97450067del	g.97699399T>C	g.97691776G>A	g.97679170T>C	g.97595149T>C	g.97595088A>G	g.97595083G>A	g.97593379C>T	g.97593343C>A	g.97573839A>T	g.97373629C>A	g.97593289G>A	g.97593238T>C	g.97699533C>T	g.97699506C>T	g.97579893G>C	g.97699474T>C	g.97573943C>A	g.97573918C>A	g.97573881C>T	g.97573863C>T	g.97883329A>G	g.97573821C>A	g.97573805C>T	g.97573785A>C	g.97549735G>A	g.97549726G>C	g.97549713G>A	g.97549681G>T	g.97515923C>T	g.97549609G>A	g.97549600T>C	g.97549565C>T	g.97515889G>C	g.97515865C>T	g.97515851C>T	g.97515839T>C	g.97515787A>C	g.97515784C>A	g.97450190G>A	g.97450189C>T	g.97450187C>T	g.97450168A>G	g.97450059G>C	g.97450058C>T	g.97382461T>G	g.97373598C>T	g.97306195C>T	g.97305372G>A	g.97305364C>T	g.97305363A>C	g.97305279G>A	g.97234991G>T	g.97234958G>T	g.97193209C>T	g.97193109T>C	g.97098632T>G	g.97079077G>A	g.97740400C>T	g.97079076A>C	g.97079071C>A	g.97079005C>T	g.97078993C>G	g.97078987G>T	g.97883368G>C	g.97883353G>A	g.97883352C>T	g.97721650T>C	g.97721542T>C	g.97699535T>C	g.97593322C>T	g.97079121T>C	g.97450068A>G	g.97098616C>A	g.97098599G>A	g.97098598C>T	g.97699430T>G	g.97573919G>A	g.97082391T>A	g.97082365T>C	g.97079139T>C	g.97079133T>A
+Position at NG_008807.2 (DPYD RefSeqGene)	g.185642TCAT[1]	g.475994del	g.226661A>G	g.234284C>T	g.246890A>G	g.330911A>G	g.330972T>C	g.330977C>T	g.332681G>A	g.332717G>T	g.352221T>A	g.552431G>T	g.332771C>T	g.332822A>G	g.226527G>A	g.226554G>A	g.346167C>G	g.226586A>G	g.352117G>T	g.352142G>T	g.352179G>A	g.352197G>A	g.42731T>C	g.352239G>T	g.352255G>A	g.352275T>G	g.376325C>T	g.376334C>G	g.376347C>T	g.376379C>A	g.410137G>A	g.376451C>T	g.376460A>G	g.376495G>A	g.410171C>G	g.410195G>A	g.410209G>A	g.410221A>G	g.410273T>G	g.410276G>T	g.475870C>T	g.475871G>A	g.475873G>A	g.475892T>C	g.476001C>G	g.476002G>A	g.543599A>C	g.552462G>A	g.619865G>A	g.620688C>T	g.620696G>A	g.620697T>G	g.620781C>T	g.691069C>A	g.691102C>A	g.732851G>A	g.732951A>G	g.827428A>C	g.846983C>T	g.185660G>A	g.846984T>G	g.846989G>T	g.847055G>A	g.847067G>C	g.847073C>A	g.42692C>G	g.42707C>T	g.42708G>A	g.204410A>G	g.204518A>G	g.226525A>G	g.332738G>A	g.846939A>G	g.475992T>C	g.827444G>T	g.827461C>T	g.827462G>A	g.226630A>C	g.352141C>T	g.843669A>T	g.843695A>G	g.846921A>G	g.846927A>T
+rsID	rs72549309	rs72549303	rs72549307	rs1801266	rs45589337	rs146356975	rs150437414	rs145112791	rs201018345	rs72549306	rs200064537	rs138545885	rs143154602	rs72549305	rs139834141	rs6670886	rs75017182	rs115232898	rs78060119	rs143815742	rs61622928	rs56038477	rs1801265	rs764666241	rs142512579	rs186169810	rs72975710	rs144395748	rs57918000	rs199549923	rs148994843	rs72549304	rs111858276	rs138391898	rs190951787	rs1801158	rs142619737	rs1801159	rs55886062	rs201615754	rs59086055	rs138616379	rs145773863	rs147601618	rs3918289	rs3918290	rs55971861	rs137999090	rs145548112	rs146529561	rs1801160	rs60511679	rs112766203	rs56005131	rs199634007	rs200687447	rs60139309	rs201035051	rs202144771	rs150385342	rs139459586	rs1801268	rs140114515	rs148799944	rs114096998	rs150036960	rs72549310	rs80081766	rs141462178	rs200562975	rs2297595	rs183385770	rs72547601	rs17376848	rs55674432	rs147545709	rs1801267	rs72549308	rs140602333	rs67376798	rs141044036	rs145529148	rs72547602
+DPYD Allele																																																																																			
+Reference	ATGA(2)	G	T	G	T	T	A	G	C	C	A	C	G	T	C	C	G	T	C	C	C	C	A	C	C	A	G	G	G	G	C	G	T	C	G	C	C	T	A	C	G	C	C	A	G	C	T	C	C	G	C	A	G	G	G	C	T	T	G	C	A	C	C	C	G	G	G	C	T	T	T	C	T	A	C	G	C	T	G	T	T	T	T
+c.46C>G																																																																		C																	
+c.61C>T																																																																			A																
+c.62G>A																																																																				T															
+c.85T>C (*9A)																							G																																																												
+c.295_298delTCAT (*7)	ATGA(1)																																																																																		
+c.313G>A																																																												T																							
+c.343A>G																																																																					C														
+c.451A>G																																																																						C													
+c.496A>G																																																																							C												
+c.498G>A															T																																																																				
+c.525G>A																T																																																																			
+c.557A>G																		C																																																																	
+c.601A>C																																																																														G					
+c.632A>G			C																																																																																
+c.703C>T (*8)				A																																																																															
+c.775A>G					C																																																																														
+c.868A>G						C																																																																													
+c.929T>C							G																																																																												
+c.934C>T								A																																																																											
+c.967G>A									T																																																																										
+c.1003G>T (*11)										A																																																																									
+c.1024G>A																																																																								T											
+c.1057C>T													A																																																																						
+c.1108A>G														C																																																																					
+c.1129-5923C>G, c.1236G>A (HapB3)																	C					T																																																													
+c.1156G>T (*12)																			A																																																																
+c.1180C>T																																																																															A				
+c.1181G>T																				A																																																															
+c.1218G>A																					T																																																														
+c.1260T>A											T																																																																								
+c.1278G>T																								A																																																											
+c.1294G>A																									T																																																										
+c.1314T>G																										C																																																									
+c.1349C>T																											A																																																								
+c.1358C>G																												C																																																							
+c.1371C>T																													A																																																						
+c.1403C>A																														T																																																					
+c.1475C>T																																A																																																			
+c.1484A>G																																	C																																																		
+c.1519G>A																																		T																																																	
+c.1543G>A																															T																																																				
+c.1577C>G																																			C																																																
+c.1601G>A (*4)																																				T																																															
+c.1615G>A																																					T																																														
+c.1627A>G (*5)																																						C																																													
+c.1679T>G (*13)																																							C																																												
+c.1682G>T																																								A																																											
+c.1774C>T																																									A																																										
+c.1775G>A																																										T																																									
+c.1777G>A																																											T																																								
+c.1796T>C																																												G																																							
+c.1896T>C																																																																										G									
+c.1898delC (*3)		delG																																																																																	
+c.1905+1G>A (*2A)																																														T																																					
+c.1905C>G																																													C																																						
+c.1906A>C																																															G																																				
+c.1990G>T												A																																																																							
+c.2021G>A																																																T																																			
+c.2161G>A																																																	T																																		
+c.2186C>T																																																		A																																	
+c.2194G>A (*6)																																																			T																																
+c.2195T>G																																																				C																															
+c.2279C>T																																																					A																														
+c.2303C>A																																																						T																													
+c.2336C>A																																																							T																												
+c.2482G>A																																																								T																											
+c.2582A>G																																																									C																										
+c.2623A>C																																																										G																									
+c.2639G>T																																																																											A								
+c.2656C>T																																																																												A							
+c.2657G>A (*9B)																																																																													T						
+c.2846A>T																																																																																A			
+c.2872A>G																																																																																	C		
+c.2915A>G																																																																																		C	
+c.2921A>T																																																																																			A
+c.2933A>G																																																																									C										
+c.2977C>T																																																											A																								
+c.2978T>G																																																													C																						
+c.2983G>T (*10)																																																														A																					
+c.3049G>A																																																															T																				
+c.3061G>C																																																																G																			
+c.3067C>A																																																																	T																		

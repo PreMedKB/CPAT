@@ -1,0 +1,50 @@
+Nucleotide change per gene from https://www.pharmvar.org	35297G>A	35324G>T	37038A>G	55401C>T	58970C>G	64457A>G	80781C>T	31160C>T	31202G>A	31208T>C	33021T>C	35230A>G	35294A>G	35305C>A	35309A>G	37041T>C	37383A>G	55377A>G	55402G>A	59021T>C	60981C>G	61075A>G	60979T>G	61090G>A	64347A>G	64425G>C	97539A>G	97468A>C	97571C>T	97584C>T	97503A>G
+Effect on protein (NP_006437.3)	p.R152L	splicing defect	p.Y173C	p.R253X	p.P336R	p.I499V	p.R580X	p.R57W	p.G71R	p.F73L	p.V82A	p.N130D	p.N151S	p.P155T	p.E156G	p.V174A	p.I222V	p.I245V	p.R253Q	p.I353T	p.F400L	p.N432D	p.F400V	p.G437R	p.D462G	p.G488A	p.E667G	p.L643F	p.H678Y	p.S682F	p.D655G
+"Position at NC_000012.12 (Homo sapiens chromosome 12, GRCh38.p2)"	g.21176871G>A	g.21176898G>T	g.21178612A>G	g.21196975C>T	g.21200544C>G	g.21206031A>G	g.21222355C>T	g.21172734C>T	g.21172776G>A	g.21172782T>C	g.21174595T>C	g.21176804A>G	g.21176868A>G	g.21176879C>A	g.21176883A>G	g.21178615T>C	g.21178957A>G	g.21196951A>G	g.21196976G>A	g.21200595T>C	g.21202555C>G	g.21202649A>G	g.21202553T>G	g.21202664G>A	g.21205921A>G	g.21205999G>C	g.21239113A>G	g.21239042A>C	g.21239145C>T	g.21239158C>T	g.21239077A>G
+Position at NG_011745.1 (SLCO1B1 RefSeqGene)	g.50678G>A	g.50705G>T	g.52419A>G	g.70782C>T	g.74351C>G	g.79838A>G	g.96162C>T	g.46541C>T	g.46583G>A	g.46589T>C	g.48402T>C	g.50611A>G	g.50675A>G	g.50686C>A	g.50690A>G	g.52422T>C	g.52764A>G	g.70758A>G	g.70783G>A	g.74402T>C	g.76362C>G	g.76456A>G	g.76360T>G	g.76471G>A	g.79728A>G	g.79806G>C	g.112920A>G	g.112849A>C	g.112952C>T	g.112965C>T	g.112884A>G
+rsID		rs77271279	rs141467543	rs183501729	rs72559747	rs74064213	rs71581941	rs139257324	rs373327528	rs56101265	rs56061388	rs2306283	rs2306282	rs11045819	rs72559745	rs4149056	rs79135870	rs11045852	rs11045853	rs55901008	rs59113707	rs56387224	rs1228465562	rs142965323	rs72559748	rs59502379	rs55737008	rs34671512	rs200995543	rs140790673	rs56199088
+SLCO1B1 Allele																															
+*1	G	G	A	C	C	A	C	C	G	T	T	A	A	C	A	T	A	A	G	T	C	A	T	G	A	G	A	A	C	C	A
+*2										C																					
+*3											C				G																
+*4														A																	
+*5																C															
+*6																				C											
+*7																						G									
+*8																									G						
+*9																										C					
+*10																															G
+*11																											G				
+*12										C																					G
+*13											C				G												G				
+*14												G		A																	
+*15												G				C															
+*16													G																		
+*19																												C			
+*20												G																C			
+*23									A																						
+*24												G						G													
+*25												G		A				G	A												
+*26																								A							
+*27												G									G										
+*28												G						G	A												
+*29												G																		T	
+*30												G					G														
+*31												G														C					
+*32												G		A				G													
+*33								T				G						G	A												
+*34																													T		
+*36																							G								
+*37												G																			
+*38	A																														
+*39				T								G																			
+*40																C												C			
+*41		T																													
+*42			G									G																			
+*43						G						G		A				G													
+*44						G						G						G													
+*45							T																								
+*46							T					G				C															
+*47					G							G				C															
+*48																															
+*49																															

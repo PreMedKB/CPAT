@@ -1,0 +1,52 @@
+Nucleotide change on cDNA (NM_000540.2)	1A>G	2T>C	83A>T	95_96insA	106G>A	124C>G	146T>C	200T>C	205C>G	211G>A	218C>T	238G>C	244C>T	262G>A	319T>G	340G>A	349G>C	356A>C	365A>C	374C>T	395G>A	430G>C	460G>A	487C>T	495-1G>A	497A>G	500C>G	514T>C	537G>T	539A>T	595G>A	611T>C	622T>C	626-1G>A	634T>C	644G>A	648T>A	677G>A	681T>G	712A>G	719A>G;719A>C	234G>T	488G>A; 488G>C
+Effect on protein (NP_000358.1)	p.M1V	p.M1T	p.E28V	p.K32KfsX58	p.G36S	p.Q42E	p.L49S	p.F67S	p.L69V	p.G71R	p.A73V	p.A80P	p.R82W	p.G88S	p.Y107D	p.E114K	p.G117R	p.K119T	p.K122T	p.S125L	p.C132Y	p.G144R	p.A154T	p.R163C		p.Y166C	p.A167G	p.S172P	p.Q179H	p.Y180F	p.V199I	p.I204T	p.F208L		p.C212R	p.R215H	p.C216X	p.R226Q	p.H227Q	p.K238E	p.Y240C; p.Y240S	p.W78C	p.R163H; p.R163P
+Position at NC_000006.12 (Homo sapiens chromosome 6, GRCh38.p2)	g.18149127T>C	g.18149126A>G	g.18149045T>A	g.18149032_18149033insT	g.18149022C>T	g.18149004G>C	g.18147910A>G	g.18147856A>G	g.18147851G>C	g.18147845C>T	g.18147838G>A	g.18143724C>G	g.18143718G>A	g.18143700C>T	g.18143643A>C	g.18143622C>T	g.18143613C>G	g.18143606T>G	g.18143597T>G	g.18139710G>A	g.18139689C>T	g.18139027C>G	g.18138997C>T	g.18138970G>A	g.18133890C>T	g.18133887T>C	g.18133884G>C	g.18133870A>G	g.18133847C>A	g.18133845T>A	g.18132163C>T	g.18132147A>G	g.18132136A>G	g.18130781C>T	g.18130772A>G	g.18130762C>T	g.18130758A>T	g.18130729C>T	g.18130725A>C	g.18130694T>C	g.18130687T>C; g.18130687T>G	g.18143728C>A	g.18138969C>T; g.18138969C>G
+Position at NG_012137.2 (TPMT RefSeqGene)	g.11017A>G	g.11018T>C	g.11099A>T	g.11111_11112insA	g.11122G>A	g.11140C>G	g.12234T>C	g.12288T>C	g.12293C>G	g.12299G>A	g.12306C>T	g.16420G>C	g.16426C>T	g.16444G>A	g.16501T>G	g.16522G>A	g.16531G>C	g.16538A>C	g.16547A>C	g.20434C>T	g.20455G>A	g.21117G>C	g.21147G>A	g.21174C>T	g.26254G>A	g.26257A>G	g.26260C>G	g.26274T>C	g.26297G>T	g.26299A>T	g.27981G>A	g.27997T>C	g.28008T>C	g.29363G>A	g.29372T>C	g.29382G>A	g.29386T>A	g.29415G>A	g.29419A>C	g.29450A>G	g.29457A>G; g.29457A>C	g.16416G>T	g.21175G>A; g.21175G>C
+rsID	rs9333569	rs267607275	rs72552742	rs759836180	rs750424422		rs72552740		rs200591577	rs777686348	rs281874771	rs1800462	rs111901354	rs753545734		rs115106679		rs151149760		rs200220210	rs72552738	rs72552737	rs1800460	rs112339338	rs9333570	rs201695576	rs74423290	rs772832951	rs6921269	rs75543815		rs79901429	rs72556347	rs1800584	rs377085266	rs56161402	rs398122996	rs139392616	rs72552736	rs150900439	rs1142345	rs1256618794	rs144041067
+TPMT Allele																																											
+*1	T	A	T	del	C	G	A	A	G	C	G	C	G	C	A	C	C	T	T	G	C	C	C	G	C	T	G	A	C	T	C	A	A	C	A	C	A	C	A	T	T	C	C
+*2												G																															
+*3A																							T																		C		
+*3B																							T																				
+*3C																																									C		
+*4																																		T									
+*5							G																																				
+*6																														A													
+*7																																							C				
+*8																																				T							
+*9																		G																									
+*10																						G																					
+*11																					T																						
+*12																				A																							
+*13			A																																								
+*14	C																																										
+*15																									T																		
+*16																																											T
+*17						C																																					
+*18										T																																	
+*19																			G																								
+*20																																								C			
+*21									C																																		
+*22																																											G
+*23																											C																
+*24																													A														
+*25																																			G								
+*26																																	G										
+*27															C																												
+*28																	G																										
+*29		G																																									
+*30					T																																						
+*31																																G											
+*32																T																											
+*33																								A																			
+*34													A																														
+*35								G																																			
+*36																															T												
+*37																																					T						
+*38																												G															
+*39											A																																
+*40																																						T					
+*41																																									G		
+*42				insT																																							
+*43														T																												A	
+*44																										C																	

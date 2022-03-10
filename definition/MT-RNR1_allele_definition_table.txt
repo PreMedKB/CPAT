@@ -1,0 +1,31 @@
+Nucleotide change on cDNA (NM_001042351.2)	807A>C; 807A>G	960C>del	961T>G	961T>del; 961T>del+Cn	663A>G	669T>C	747A>G	786G>A	827A>G	839A>G	896A>G	930A>G	951G>A	988G>A	1095T>C	1189T>C	1243T>C	1494C>T	1520T>C	1537C>T	1555A>G	1556C>T
+Effect on protein (NP_000101.2)																						
+Position at NC_012920.1 (Homo sapiens chromosome , GRCh38.p2)	m.807A>C; m.807A>G	m.960delC	m.961T>G	m.961delT; m.961delTinsC(n)	m.663A>G	m.669T>C	m.747A>G	m.786G>A	m.827A>G	m.839A>G	m.896A>G	m.930A>G	m.951G>A	m.988G>A	m.1095T>C	m.1189T>C	m.1243T>C	m.1494C>T	m.1520T>C	m.1537C>T	m.1555A>G	m.1556C>T
+Position at NG_042193.1 (MT-RNR1 RefSeqGene)																						
+rsID			rs3888511	rs1556422499	rs56489998				rs28358569				rs200887992		rs267606618	rs28358571	rs28358572	rs267606619			rs267606617	
+MT-RNR1 Allele																						
+Reference	A	C	T	T	A	T	A	G	A	A	A	A	G	G	T	T	T	C	T	C	A	C
+663A>G					G																	
+669T>C						C																
+747A>G							G															
+786G>A								A														
+807A>C	C																					
+807A>G	G																					
+827A>G									G													
+839A>G										G												
+896A>G											G											
+930A>G												G										
+951G>A													A									
+960C>del		delC																				
+961T>G			G																			
+961T>del				delT																		
+961T>del+Cn				delinsCC; delinsCCC; delinsCCCC; delinsCCCCC; delinsCCCCCC; delinsCCCCCCC																		
+988G>A														A								
+1095T>C															C							
+1189T>C																C						
+1243T>C																	C					
+1494C>T																		T				
+1520T>C																			C			
+1537C>T																				T		
+1555A>G																					G	
+1556C>T																						T

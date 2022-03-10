@@ -1,0 +1,3 @@
+ABCG2 allele	African American/Afro-Caribbean	American	Central/South Asian	East Asian	European	Latino	Near Eastern	Oceanian	Sub-Saharan African
+G	0.9651	0.8000	0.9068	0.6929	0.8964	0.7756	0.9347	0.7953	0.9942
+T	0.0349	0.2000	0.0932	0.3071	0.1036	0.2244	0.0653	0.2047	0.0058

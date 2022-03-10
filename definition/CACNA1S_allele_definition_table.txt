@@ -1,0 +1,9 @@
+Nucleotide change on cDNA (NM_000069.2)	c.3257G>A	c.520C>T
+Effect on protein (NP_000060.2)	p.R1086H	p.R174W
+Position at NC_000001.11 (Homo sapiens chromosome 1, GRCh38.p2)	g.201060815C>T	g.201091993G>A
+Position at NG_009816.1 (CACNA1S RefSeqGene)	g.56752G>A	g.25574C>T
+rsID	rs1800559	rs772226819
+CACNA1S Allele		
+Reference	C	G
+c.520C>T		A
+c.3257G>A	T	

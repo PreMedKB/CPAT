@@ -1,0 +1,8 @@
+Nucleotide change on cDNA (NM_000540.2)	-1639G>A
+Effect on protein (NP_076869.1)	5' region
+Position at NC_000016.10 (Homo sapiens chromosome 16, GRCh38.p2)	g.31096368C>T
+Position at NG_011564.1 (VKORC1 RefSeqGene)	g.3588G>A
+rsID	rs9923231
+VKORC1 Allele	
+C	C
+T	T

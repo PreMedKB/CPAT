@@ -1,0 +1,7 @@
+CYP3A5 allele	African American/Afro-Caribbean	American	Central/South Asian	East Asian	European	Latino	Near Eastern	Oceanian	Sub-Saharan African
+*1	0.6046		0.3267	0.2541	0.0753	0.2023	0.1361		0.5984
+*3	0.3160		0.6733	0.7458	0.9244	0.7651	0.8361		0.2409
+*6	0.1112		0.0000	0.0007	0.0015	0.0371	0.0381		0.1932
+*7	0.1200			0.0000	0.0000	0.0250	0.0039		0.0864
+*8									
+*9									

@@ -1,0 +1,4 @@
+CYP4F2 allele	African American/Afro-Caribbean	American	Central/South Asian	East Asian	European	Latino	Near Eastern	Oceanian	Sub-Saharan African
+*1	0.9238	0.5892	0.5983	0.7761	0.6980	0.8083	0.6004		0.9247
+*2									
+*3	0.0762	0.4108	0.4017	0.2239	0.3020	0.1917	0.3996		0.0753

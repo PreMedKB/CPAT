@@ -1,0 +1,4 @@
+CACNA1S allele	African American/Afro-Caribbean	American	Central/South Asian	East Asian	European	Latino	Near Eastern	Oceanian	Sub-Saharan African
+Reference			1.0000	0.9999	1.0000	1.0000	1.0000		
+c.520C>T			0.0000	0.0001	0.0000	0.0001	0.0000		
+c.3257G>A			0.0000	0.0000	0.0000	0.0000	0.0000		

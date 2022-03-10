@@ -1,0 +1,12 @@
+Nucleotide change per gene from https://www.pharmvar.org	27126_27127insT	3699C>T	14685G>A	6981A>G	19381G>A
+Effect on protein (NP_000768.1)	p.T346fs	p.R28C	splicing defect	splicing defect	p.A337T
+Position at NC_000007.14 (Homo sapiens chromosome 7, GRCh38.p2)	g.99652771dup	g.99676198G>A	g.99665212C>T	g.99672916T>C	g.99660516C>T
+Position at NG_007938.2 (CYP3A5 RefSeqGene)	g.32228dup	g.8801C>T	g.19787G>A	g.12083A>G	g.24483G>A
+rsID	rs41303343	rs55817950	rs10264272	rs776746	rs28383479
+CYP3A5 Allele					
+*1	A	G	C	T	C
+*3				C	
+*6			T		
+*7	AA				
+*8		A			
+*9					T
