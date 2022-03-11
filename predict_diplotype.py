@@ -72,9 +72,8 @@ def index2alt_gt(pos, var, gt, non_gt):
   return (non_gt)
 
 
-def phase_alle(allele_definition_table, gene):
+def phase_alle(allele_definition_table, gene):  # sourcery no-metrics
   pos, list_alt, list_ref, index_nonsnp = [], [], [], []
-  alt, ref = "", ""
   dic_alle2genotype = {}
 
   with open(allele_definition_table, 'r', encoding='utf-8') as file:
@@ -120,9 +119,11 @@ def phase_alle(allele_definition_table, gene):
           for j in range(0, len(info)):
             if info[j] == '' or info[j] == list_ref[j]:
               genotype = 0
+              # genotype = list_ref[j] + '/' + list_ref[j]
             else:
+              #genotype = list_ref[j] + '/' + info[j]
               if info[j] in list(dic_degenerate_bases.keys()):
-                genotype = 0.5
+                genotype = -(len(dic_degenerate_bases[info[j]])-1)
               else:
                 genotype = 1
             gt.append(genotype)
@@ -186,41 +187,58 @@ def less_than_0(x):
     return x
 
 
+def mix_rank(candidate, dic_diplotype2fre):
+  # Rank the diplotype frequency
+  unique_fre = []
+  for key in candidate.keys():
+    unique_fre.append(float(dic_diplotype2fre[key][dic_race2col[race]]))
+  unique_fre = sorted(set(unique_fre))
+
+  # Genotype rank + Population rank
+  unique_cut = sorted(set(candidate.values()), reverse=True)
+  dic_diplotype2score = {}
+  for key in candidate.keys():
+    diplotype_fre = float(dic_diplotype2fre[key][dic_race2col[race]])
+    dic_diplotype2score[key] = unique_cut.index(candidate[key]) + unique_fre.index(diplotype_fre)*(len(unique_cut)/len(unique_fre))
+  
+  return(dic_diplotype2score)
+
+
 def phase_diplotype(dic_gene_alle2genotype, gene_genotype, dic_diplotype2fre, race):
   candidate = {}
-  for i in dic_gene_alle2genotype:
-    for j in dic_gene_alle2genotype:
-      dip_gt, cut_gt = [], []
-      for index in range(0, len(dic_gene_alle2genotype[i])):
-        dip_gt.append(dic_gene_alle2genotype[i][index] + dic_gene_alle2genotype[j][index])
-      # print(dip_gt)
-      # print(len(gene_genotype), len(dic_gene_alle2genotype[i]), 11)
-      for index in range(0, len(dic_gene_alle2genotype[i])):
-        cut_gt.append(float(gene_genotype[index]) - float(dip_gt[index]))
-        # if i == "*1" and j == "*1":
-        #   print(i, j, gene_genotype[index], dip_gt[index], cut_gt)
-      
-      if len(list(filter(less_than_0, cut_gt))):
-        pass
-      else:
-        candidate[(i + '/' + j)] = sum(cut_gt)
+  import itertools
+  combination = list(itertools.combinations_with_replacement(sorted(dic_gene_alle2genotype), 2))
+  for comb in combination:
+    i = comb[0]; j = comb[1]
+    dip_gt, cut_gt = [], []
+    for index in range(0, len(dic_gene_alle2genotype[i])):
+      dip_gt.append(dic_gene_alle2genotype[i][index] + dic_gene_alle2genotype[j][index])
+    # print(dip_gt)
+    # print(len(gene_genotype), len(dic_gene_alle2genotype[i]), 11)
+    for index in range(0, len(dic_gene_alle2genotype[i])):
+      cut_gt.append(float(gene_genotype[index]) - float(dip_gt[index]))
+    if len(list(filter(less_than_0, cut_gt))):
+      pass
+    else:
+      candidate[(i + '/' + j)] = sum(cut_gt)
   
-  # min_score = candidate[min(candidate, key=candidate.get)]
-  # if min_score > 0:
-  #   dic_diplotype2score = {}
-  #   for i in candidate:
-  #     dic_diplotype2score[i] = float(dic_diplotype2fre[i][dic_race2col[race]])
-  #   diplotype = max(dic_diplotype2score, key=dic_diplotype2score.get)
-  # else:
-  #   sub_candidate = []
-  #   for i in candidate:
-  #     if candidate[i] == min_score:
-  #       sub_candidate.append(i)
-  #   dic_diplotype2score = {}
-    
-  #   for j in sub_candidate:
-  #     dic_diplotype2score[j] = float(dic_diplotype2fre[j][dic_race2col[race]])
-  #   diplotype = max(dic_diplotype2score, key=dic_diplotype2score.get)
+  min_score = candidate[min(candidate, key=candidate.get)]
+  # if min score is 0 means the exact map
+  if min_score == 0:
+    sub_candidate = {}
+    for i in candidate:
+      if candidate[i] == min_score:
+        sub_candidate[i] = min_score
+    # diplotype Score
+    dic_diplotype2score = mix_rank(sub_candidate, dic_diplotype2fre)
+    # for j in sub_candidate:
+    #   dic_diplotype2score[j] = float(dic_diplotype2fre[j][dic_race2col[race]])
+  else:
+    dic_diplotype2score = mix_rank(candidate, dic_diplotype2fre)
+    # dic_diplotype2score = {}
+    # for i in candidate:
+    #   dic_diplotype2score[i] = float(dic_diplotype2fre[i][dic_race2col[race]])
+  # diplotype = max(dic_diplotype2score, key=dic_diplotype2score.get)
   
   # ## TEST Version 1
   # reference = dic_gene_ref_haplotype[gene] + '/' + dic_gene_ref_haplotype[gene]
@@ -237,23 +255,29 @@ def phase_diplotype(dic_gene_alle2genotype, gene_genotype, dic_diplotype2fre, ra
   
   # diplotype = max(dic_diplotype2score, key=dic_diplotype2score.get)
   
-  ## TEST Version 2
-  # Rank the diplotype frequency
-  unique_fre = []
-  for key in candidate.keys():
-    unique_fre.append(float(dic_diplotype2fre[key][dic_race2col[race]]))
-  unique_fre = sorted(set(unique_fre))
+  # ## TEST Version 2
+  # # Rank the diplotype frequency
+  # unique_fre = []
+  # for key in candidate.keys():
+  #   unique_fre.append(float(dic_diplotype2fre[key][dic_race2col[race]]))
+  # unique_fre = sorted(set(unique_fre))
 
-  # Genotype rank + Population rank
-  unique_cut = sorted(set(candidate.values()), reverse=True)
-  dic_diplotype2score = {}
-  for key in candidate.keys():
-    diplotype_fre = float(dic_diplotype2fre[key][dic_race2col[race]])
-    dic_diplotype2score[key] = unique_cut.index(candidate[key]) + unique_fre.index(diplotype_fre)
+  # # Genotype rank + Population rank
+  # unique_cut = sorted(set(candidate.values()), reverse=True)
+  # dic_diplotype2score = {}
+  # for key in candidate.keys():
+  #   diplotype_fre = float(dic_diplotype2fre[key][dic_race2col[race]])
+  #   dic_diplotype2score[key] = unique_cut.index(candidate[key]) + unique_fre.index(diplotype_fre)*(len(unique_cut)/len(unique_fre))
   
-  diplotype = max(dic_diplotype2score, key=dic_diplotype2score.get)
-  print(dic_diplotype2score)
-  return (diplotype)
+  #diplotype = max(dic_diplotype2score, key=dic_diplotype2score.get)
+  # Sum result has equal rank
+  diplotype = []
+  max_rank = max(dic_diplotype2score.values())
+  for key in dic_diplotype2score.keys():
+    if dic_diplotype2score[key] == max_rank:
+      diplotype.append(key)
+  
+  return ('; '.join(diplotype))
 
 
 def connect_database():
@@ -314,7 +338,7 @@ for vcf in test_vcfs:
     race = metadata.loc[metadata['Get-RM 137 Samples']==sample, 'Superpopulation'].to_list()[0]
     race = pharmgkb_100genome[race]
     print(sample, race)
-    result[sample] = main(vcf_file, race, ['UGT1A1'])
+    result[sample] = main(vcf_file, race, gene_list)
 
 test_df = pd.DataFrame(result)
 
@@ -351,8 +375,10 @@ for g in overlap_gene:
       x = re.findall(r'\*\w+', test[i])
       y = re.findall(r'\*\w+', validate[i])
       yy = [j.replace('*0', '*') for j in y]
-      if g == 'DPYD':
-        print(x, yy, test[i], validate[i])
+      # if g == 'DPYD':
+      #   print(x, yy, test[i], validate[i])
+    # if g == 'VKORC1':
+    #   print(x, yy, test[i], validate[i])
     if set(x) <= set(yy):
       right = right+1
     else:

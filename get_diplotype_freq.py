@@ -39,12 +39,25 @@ for g in gene:
 
   for i in range(9):
     locals() ['d' + str(i)] = {}
-
+  
+  # Hardy–Weinberg equilibrium
+  import itertools
+  combination = list(itertools.combinations_with_replacement(sorted(locals() ['x' + str(i)]), 2))
   for i in range(9):
-    for j in locals() ['x' + str(i)]:
-      for k in locals() ['x' + str(i)]:
-        diplotype = j + '/' + k
-        locals() ['d' + str(i)] [diplotype] = locals() ['x' + str(i)][j] *  locals() ['x' + str(i)][k]
+    for j in combination:
+      diplotype = j[0] + '/' + j[1]
+      if j[0]!= j[1]:
+        # heterozygotes
+        locals() ['d' + str(i)] [diplotype] = 2 * locals() ['x' + str(i)][j[0]] *  locals() ['x' + str(i)][j[1]]
+      else:
+        # homozygotes
+        locals() ['d' + str(i)] [diplotype] = locals() ['x' + str(i)][j[0]] *  locals() ['x' + str(i)][j[1]]
+  
+  # for i in range(9):
+  #   for j in locals() ['x' + str(i)]:
+  #     for k in locals() ['x' + str(i)]:
+  #       diplotype = j + '/' + k
+  #       locals() ['d' + str(i)] [diplotype] = locals() ['x' + str(i)][j] *  locals() ['x' + str(i)][k]
 
   #print (d1)
   dic_race2dtfq = {
