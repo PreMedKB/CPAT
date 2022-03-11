@@ -50,8 +50,6 @@ dic_gene_ref_haplotype = {
   'VKORC1': 'C'
 }
 
-gene_list = ("ABCG2", "CACNA1S", "CYP2B6", "CYP2C19", "CYP2C9", "CYP2D6", "CYP3A4", "CYP3A5", "CYP4F2", "DPYD", "MT-RNR1", "NUDT15", "RYR1", "SLCO1B1", "TPMT", "UGT1A1", "VKORC1")
-
 
 ######################
 ##### Funcitions #####
@@ -122,9 +120,9 @@ def phase_alle(allele_definition_table, gene):  # sourcery no-metrics
               # genotype = list_ref[j] + '/' + list_ref[j]
             else:
               #genotype = list_ref[j] + '/' + info[j]
-              if info[j] in list(dic_degenerate_bases.keys()):
-                genotype = -(len(dic_degenerate_bases[info[j]])-1)
-              else:
+              # if info[j] in list(dic_degenerate_bases.keys()):
+              #   genotype = -(len(dic_degenerate_bases[info[j]])-1)
+              # else:
                 genotype = 1
             gt.append(genotype)
         dic_alle2genotype[alle] = gt
@@ -187,7 +185,7 @@ def less_than_0(x):
     return x
 
 
-def mix_rank(candidate, dic_diplotype2fre):
+def mix_rank(candidate, dic_diplotype2fre, race):
   # Rank the diplotype frequency
   unique_fre = []
   for key in candidate.keys():
@@ -230,11 +228,11 @@ def phase_diplotype(dic_gene_alle2genotype, gene_genotype, dic_diplotype2fre, ra
       if candidate[i] == min_score:
         sub_candidate[i] = min_score
     # diplotype Score
-    dic_diplotype2score = mix_rank(sub_candidate, dic_diplotype2fre)
+    dic_diplotype2score = mix_rank(sub_candidate, dic_diplotype2fre, race)
     # for j in sub_candidate:
     #   dic_diplotype2score[j] = float(dic_diplotype2fre[j][dic_race2col[race]])
   else:
-    dic_diplotype2score = mix_rank(candidate, dic_diplotype2fre)
+    dic_diplotype2score = mix_rank(candidate, dic_diplotype2fre, race)
     # dic_diplotype2score = {}
     # for i in candidate:
     #   dic_diplotype2score[i] = float(dic_diplotype2fre[i][dic_race2col[race]])
@@ -280,25 +278,6 @@ def phase_diplotype(dic_gene_alle2genotype, gene_genotype, dic_diplotype2fre, ra
   return ('; '.join(diplotype))
 
 
-def connect_database():
-  # default config
-  connect = sqlite3.connect("", uri=True)
-  cursor = connect.cursor()
-  return (cursor, connect)
-
-
-if __name__ == '__main__':
-  
-  import sys
-  import getopt
-  import re
-  import os
-  import sqlite3
-
-  # 输入模块
-  vcf_file = './test/TPMT_NA20296.vcf'
-  race = 'African_American_Afro_Caribbean'
-
 def main(vcf_file, race, gene_list):
   dic_gene2diplotype = {}
   for gene in gene_list:
@@ -319,74 +298,3 @@ def main(vcf_file, race, gene_list):
     dic_gene2diplotype[gene] = diplotype
   
   return(dic_gene2diplotype)
-  # diplotype：dic_gene2diplotype
-  # dic_rs2var
-  # pharmgkb
-
-
-
-########### Test the accuracy
-pharmgkb_100genome = {'AFR': 'African_American_Afro_Caribbean', 'AMR': 'Latino', 'EAS': 'East_Asian', 'EUR': 'European'}
-metadata = pd.read_csv('./test/population.txt', sep='\t')
-test_vcfs = os.listdir('./test/88samples/')
-result = {}
-for vcf in test_vcfs:
-  if vcf.endswith('.vcf'):
-    vcf_file = './test/88samples/%s' % vcf
-    # Get sample and race info
-    sample = vcf.split('.')[0]
-    race = metadata.loc[metadata['Get-RM 137 Samples']==sample, 'Superpopulation'].to_list()[0]
-    race = pharmgkb_100genome[race]
-    print(sample, race)
-    result[sample] = main(vcf_file, race, gene_list)
-
-test_df = pd.DataFrame(result)
-
-### Validation data
-getrm = pd.read_csv('./test/getrm_raw.txt', sep='\t', index_col=0)
-# Filter samples and genes
-overlap_gene = list(set(gene_list).intersection(set(getrm.columns.to_list())))
-samples = list(result.keys())
-getrm_new = getrm[getrm.index.isin(samples)][overlap_gene].T.replace(np.nan, '-')
-
-
-# # samples used in PharmCAT
-# pharmcat_samples = []
-# for i in metadata['PharmCAT 59 Samples'].to_list():
-#   if i != '-' and pd.isna(i) is False:
-#     pharmcat_samples.append(i)
-
-
-# Accuracy by gene
-for g in overlap_gene:
-  test = test_df.loc[g, samples].to_list()
-  validate = getrm_new.loc[g, samples].to_list()
-  # remove the nan
-  index = [x for x, y in list(enumerate(validate)) if y != '-']
-  right = 0
-  for i in index:
-    if g in ['ABCG2', 'VKORC1']:
-      x = test[i].split('/')
-      genotype = validate[i].replace('G', 'C').replace('A', 'T')
-      yy = [genotype[0], genotype[1]]
-    else:
-      if g == 'DPYD':
-        test[i] = test[i].replace('Reference', '*1')
-      x = re.findall(r'\*\w+', test[i])
-      y = re.findall(r'\*\w+', validate[i])
-      yy = [j.replace('*0', '*') for j in y]
-      # if g == 'DPYD':
-      #   print(x, yy, test[i], validate[i])
-    # if g == 'VKORC1':
-    #   print(x, yy, test[i], validate[i])
-    if set(x) <= set(yy):
-      right = right+1
-    else:
-      # Has the overlap of haplotype is passed
-      if 'no consensus' in validate[i]:
-        y = re.findall(r'\*\w+', validate[i])
-        yy = [j.replace('*0', '*') for j in y]
-        if len(set(x).intersection(set(yy))) > 0:
-          right = right+1
-  
-  print(g, round(right/len(index)*100, 2))
