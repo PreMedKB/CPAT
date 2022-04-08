@@ -1,6 +1,6 @@
-Archive.zip
-test/*
+#test/*
+archive/*
+PharmGKB.Variant
 filter_position.sh
 get_positions.py
-haplotype.bed
 poi_genotype.py

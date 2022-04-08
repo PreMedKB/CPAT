@@ -1,0 +1,24 @@
+NG_007972.1 (ATG start)	2130G>A	2189delA	4472G>A	4502G>A	4517C>G; 4517C>T	10918T>G	10961G>C	10979A>G	10989A>G	11041C>G	11054A>T	23452G>T	26356T>C	26445C>T	26513G>T	30411A>G	32184delTTG
+Effect on protein (NP_000761.3)	p.R139K	p.T159fs	p.G171S	p.V181I	p.R186G; p.R186X	p.I223M	p.A238P	p.I244V	p.K247R	p.I264M	p.I269F	p.E274X	p.I331T	p.L361F	p.K383N	p.K399R	p.461delV
+Position at NC_000010.11 (Homo sapiens chromosome 10, GRCh38.p13)	g.95067273C>T	g.95067218del	g.95064931C>T	g.95064901C>T	g.95064886G>C; g.95064886G>A	g.95058485A>C	g.95058442C>G	g.95058424T>C	g.95058414T>C	g.95058362G>C	g.95058349T>A	g.95045951C>A	g.95043047A>G	g.95042958G>A	g.95042890C>A	g.95038992T>C	g.95037219_95037221del
+Position at NG_007972.1 (CYP2C8 RefSeqGene; reverse relative to chromosome)	g.7225G>A	g.7284del	g.9567G>A	g.9597G>A	g.9612C>G; g.9612C>T	g.16013T>G	g.16056G>C	g.16074A>G	g.16084A>G	g.16136C>G	g.16149A>T	g.28547G>T	g.31451T>C	g.31540C>T	g.31608G>T	g.35506A>G	g.37279_37281del
+rsID	rs11572080	rs72558196	rs142886225	rs41286886	rs72558195		rs188934928	rs11572102	rs769460274	rs1058930	rs11572103	rs78637571	rs146806199	rs45438799		rs10509681	rs3832694
+CYP2C8 Allele																	
+*1	C	T	C	C	G	A	C	T	T	G	T	C	A	G	C	T	ACA
+*2											A						
+*3	T															C	
+*4										C							
+*5		delT															
+*6			T														
+*7					A												
+*8					C												
+*9									C								
+*10															A		
+*11												A					
+*12																	delACA
+*13						C											
+*14							G										
+*15				T													
+*16													G				
+*17								C									
+*18														A			
