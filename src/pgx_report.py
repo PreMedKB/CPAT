@@ -30,7 +30,7 @@ def report(race, pgx_summary, clinical_anno_table, outdir, basename):
       <li><a href="#efficacy">&nbsp;&nbsp;Efficacy</a></li>
       <li><a href="#metabolism/pk">&nbsp;&nbsp;Metabolism/PK</a></li>
       <li><a href="#other">&nbsp;&nbsp;Other</a></li>
-      <li><a href="#detail"><b>Dosing Guideline</b></a></li>
+      <li><a href="#guideline"><b>Dosing Guideline</b></a></li>
       <li><a href="#detail"><b>Genotype Detail</b></a></li>
       <li><a href="#haplotype/pk">&nbsp;&nbsp;Haplotype/PK</a></li>
       <li><a href="#snp/indel">&nbsp;&nbsp;SNP/Indel</a></li>
@@ -122,7 +122,11 @@ def report(race, pgx_summary, clinical_anno_table, outdir, basename):
                         html_input[6], html_input[7], html_input[8],
                         html_input[9], html_input[10], html_input[11]), file=f)
     
-    ## Part 3: Genotype
+    ## Part 3: Dosing Guideline
+    print('<h2 id="guideline">Dosing Guidelines</h2>', file=f)
+    
+
+    ## Part 4: Genotype Details
     print('<h2 id="detail">Genotype Details</h2>', file=f)
     print('<h3 id="haplotype">Haplotype/Diplotype predicted by CPAT</h3>', file=f)
     print('<p>This subsection provides CPAT predicted haplotypes based on the VCF calls, the haplotype definition table, and the haplotype population frequency table. PharmGKB and CPIC together summarized pharmacogenomic genes with explicit star(*) or named allele information are involved, specifically ABCG2, CACNA1S, CFTR, CYP2B6, CYP2C8, CYP2C9, CYP2C19, CYP3A4, CYP3A5, CYP4F2, DPYD, G6PD, MT-RNR1, NUDT15, RYR1, SLCO1B1, TPMT, UGT1A1, VKORC1.</p>', file=f)

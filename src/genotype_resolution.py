@@ -32,12 +32,12 @@ def resolution(race, germline_vcf, outdir):
   filtered_vcf.to_csv(fp, sep='\t', index=0)
   
   ## Class 1: Diplotype
-  gene_list = ["ABCG2", "CACNA1S", "CFTR", "CYP2B6", "CYP2C8", "CYP2C19", "CYP2C9", "CYP2D6",
+  gene_list = ["ABCG2", "CACNA1S", "CFTR", "CYP2B6", "CYP2C8", "CYP2C19", "CYP2C9",# "CYP2D6",
                "CYP3A4", "CYP3A5", "CYP4F2", "DPYD", "G6PD", "MT-RNR1", "NUDT15",
                "RYR1", "SLCO1B1", "TPMT", "UGT1A1", "VKORC1"]
   dic_diplotype = predict_diplotype.predict(fp, race, gene_list)
   os.system('rm %s' % fp)
-  
+
   ## Class 2: HLA genes
   # hla_genes = ["HLA-B", "HLA-A", "HLA-C", "HLA-DRB1", "HLA-DQB1", "HLA-DPB1", "HLA-DQA1", "HLA-DRB3"]
   # hla_subtypes = vcf_df[vcf_df[colnames[0]].str.contains('^HLA', regex=True)][colnames[0]].drop_duplicates().to_list()

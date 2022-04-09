@@ -51,15 +51,15 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
         anno_ids_single.append(row.ID)
   
   #########################################
-  # Fetch data from CPAT database     EvidenceLevel != 3 AND EvidenceLevel != 4 AND \
-  res1 = cursor.execute("SELECT Gene, VariantOrHaplotype, Drug, Phenotypes, EvidenceLevel, Score, PhenotypeCategoryID, GenotypeOrAllele, Annotation, Function, URL, SpecialtyPopulation FROM ClinAnn WHERE ID IN (%s);" % ','.join([str(i) for i in anno_ids_multi]))
+  # Fetch data from CPAT database
+  res1 = cursor.execute("SELECT Gene, VariantOrHaplotype, Drug, Phenotypes, EvidenceLevel, Score, PhenotypeCategoryID, GenotypeOrAllele, Annotation, Function, URL, SpecialtyPopulation, GeneID, DrugID FROM ClinAnn WHERE EvidenceLevel != 3 AND EvidenceLevel != 4 AND ID IN (%s);" % ','.join([str(i) for i in anno_ids_multi]))
   res1 = cursor.fetchall()
-  res1_df = pd.DataFrame(res1, columns=["Gene", "Variant", "Drug", "Phenotypes", "EvidenceLevel", "EvidenceScore", "PhenotypeCategoryID", "Alleles", "Annotation", "Function", "URL", "Pediatric"])
+  res1_df = pd.DataFrame(res1, columns=["Gene", "Variant", "Drug", "Phenotypes", "EvidenceLevel", "EvidenceScore", "PhenotypeCategoryID", "Alleles", "Annotation", "Function", "URL", "Pediatric", "GeneID", "DrugID"])
   res1_df['Class'] = 'Diplotype'
 
-  res2 = cursor.execute("SELECT Gene, VariantOrHaplotype, Drug, Phenotypes, EvidenceLevel, Score, PhenotypeCategoryID, GenotypeOrAllele, Annotation, Function, URL, SpecialtyPopulation FROM ClinAnn WHERE ID IN (%s);" % ','.join([str(i) for i in anno_ids_single]))
+  res2 = cursor.execute("SELECT Gene, VariantOrHaplotype, Drug, Phenotypes, EvidenceLevel, Score, PhenotypeCategoryID, GenotypeOrAllele, Annotation, Function, URL, SpecialtyPopulation FROM ClinAnn WHERE EvidenceLevel != 3 AND EvidenceLevel != 4 AND ID IN (%s);" % ','.join([str(i) for i in anno_ids_single]))
   res2 = cursor.fetchall()
-  res2_df = pd.DataFrame(res2, columns=["Gene", "Variant", "Drug", "Phenotypes", "EvidenceLevel", "EvidenceScore", "PhenotypeCategoryID", "Alleles", "Annotation", "Function", "URL", "Pediatric"])
+  res2_df = pd.DataFrame(res2, columns=["Gene", "Variant", "Drug", "Phenotypes", "EvidenceLevel", "EvidenceScore", "PhenotypeCategoryID", "Alleles", "Annotation", "Function", "URL", "Pediatric", "GeneID", "DrugID"])
   res2_df['Class'] = 'Single'
   res_df = pd.concat([res1_df, res2_df])
   res1_df.shape; res2_df.shape
@@ -109,8 +109,21 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
         cat_pgx.loc[index, 'Response'] = 'Moderate'
     pgx_summary = pd.concat([pgx_summary, cat_pgx])
   
+  # Summary Clinical Dosing Guideline
+  dosing = cursor.execute("SELECT * FROM ClinDosingGuideline;")
+  dosing = cursor.fetchall()
+  dosing = pd.DataFrame(dosing, columns=["DosingSource", "DosingAnnotation", "GeneID", "DrugID", "DosingURL"])
+  dosing_df = pd.merge(res_df, dosing, on=["GeneID", "DrugID"])
+  # Merge with drug table to get PAID
+  drug = cursor.execute("SELECT ID, PAID FROM Drug;")
+  drug = cursor.fetchall()
+  drug = pd.DataFrame(drug, columns=["DrugID", "DrugPAID"])
+  dosing_df = pd.merge(dosing_df, drug, on=["DrugID"])
+  # Output table 3: Dosing Guidelines
+  dosing_guideline_table = res_df[['Gene', 'Variant', 'Drug', 'DrugPAID', 'DosingSource', 'DosingAnnotation', 'DosingURL']]
+  
   cursor.close()
   conn.close()
   
-  return(pgx_summary, clinical_anno_table)
+  return(pgx_summary, clinical_anno_table, dosing_guideline_table)
 
