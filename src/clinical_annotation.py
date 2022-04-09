@@ -7,7 +7,7 @@ from pybedtools import BedTool
 def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   
   ## Connected database
-  conn = sqlite3.connect("./assets/dbs/CPAT_v20220317.db")
+  conn = sqlite3.connect("./assets/dbs/CPAT_v20220408.db")
   cursor = conn.cursor()
 
   ## Find therapies, extract the table
@@ -51,7 +51,7 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
         anno_ids_single.append(row.ID)
   
   #########################################
-  # Fetch data from CPAT database
+  # Fetch data from CPAT database     EvidenceLevel != 3 AND EvidenceLevel != 4 AND \
   res1 = cursor.execute("SELECT Gene, VariantOrHaplotype, Drug, Phenotypes, EvidenceLevel, Score, PhenotypeCategoryID, GenotypeOrAllele, Annotation, Function, URL, SpecialtyPopulation FROM ClinAnn WHERE EvidenceLevel != 3 AND EvidenceLevel != 4 AND ID IN (%s);" % ','.join([str(i) for i in anno_ids_multi]))
   res1 = cursor.fetchall()
   res1_df = pd.DataFrame(res1, columns=["Gene", "Variant", "Drug", "Phenotypes", "EvidenceLevel", "EvidenceScore", "PhenotypeCategoryID", "Alleles", "Annotation", "Function", "URL", "Pediatric"])
@@ -62,6 +62,7 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   res2_df = pd.DataFrame(res2, columns=["Gene", "Variant", "Drug", "Phenotypes", "EvidenceLevel", "EvidenceScore", "PhenotypeCategoryID", "Alleles", "Annotation", "Function", "URL", "Pediatric"])
   res2_df['Class'] = 'Single'
   res_df = pd.concat([res1_df, res2_df])
+  res1_df.shape; res2_df.shape
   
   # Summary the data based on drug-phenotype category
   category = cursor.execute("SELECT * FROM PhenotypeCategoryDic;")
@@ -69,61 +70,46 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   category_df = pd.DataFrame(category, columns=["PhenotypeCategoryID", "PhenotypeCategory"])
   res_df = pd.merge(res_df, category_df).drop(columns=['PhenotypeCategoryID'])
   
-  function_score = {'Unknown': np.nan, 'Uncertain': np.nan, 'Unrelated': np.nan, 
-                    'Decreased': 0.5, 'Normal': 1, 'Moderate': 1, 'Increased': 2}
-  score_df = pd.DataFrame({'Function': function_score.keys(), 'FunctionScore': function_score.values()})
+  response_score = {'Unknown': np.nan, 'Uncertain': np.nan, 'Unrelated': np.nan, 'Decreased': 0.5, 'Normal': 1, 'Moderate': 1, 'Increased': 2}
+  score_df = pd.DataFrame({'Function': response_score.keys(), 'ResponseScore': response_score.values()})
   res_df = pd.merge(res_df, score_df)
   res_df.EvidenceScore = res_df.EvidenceScore.astype('float')
-  res_df['CPATScore'] = res_df.EvidenceScore * res_df.FunctionScore
-  res_df.to_csv('test.txt', sep='\t')
+  # res_df['CPATScore'] = res_df.EvidenceScore * res_df.ResponseScore
+  # res_df.to_csv('test.txt', sep='\t')
   
-  # Output table 1
+  # Output table 1: Original clinical annotation of PharmGKB
   clinical_anno_table = res_df[['Gene', 'Variant', 'Drug', 'Phenotypes', 'EvidenceLevel', 'Alleles', 'PhenotypeCategory', 'Annotation', 'Function', 'URL', 'Pediatric', 'Class']]
   
   # Categorize by phenotypes and drugs
-  drug_score_summary = {}
+  pgx_summary = pd.DataFrame()
   categories = ['Toxicity', 'Dosage', 'Efficacy', 'Metabolism/PK', 'Other']
   for cat in categories:
     cat_df = res_df[res_df.PhenotypeCategory == cat]
-    # Calculating drug scores
-    drug_score = cat_df.groupby("Drug").CPATScore.sum().sort_values(ascending = False)
-    # Calculating ratio
-    ratio = cat_df.groupby("Drug")['CPATScore', 'EvidenceScore'].mean()
-    ratio['Ratio'] = ratio.CPATScore/ratio.EvidenceScore
-    drug_score = ratio.CPATScore
-    correspond_level =[]
-    for v in drug_score.values:
-      if v >= 80:
-        correspond_level.append('1A')
-      elif v >= 25 and v < 80:
-        correspond_level.append('1B')
+    # Calculating cat_pgx
+    cat_pgx = cat_df.groupby("Drug")['ResponseScore', 'EvidenceScore'].mean()
+    # cat_pgx
+    # # drug_score = cat_pgx.CPATScore
+    # correspond_level =[]
+    cat_pgx['PhenotypeCategory'] = cat
+    cat_pgx['EvidenceLevel'] = ''; cat_pgx['Response'] = ''
+    for index, row in cat_pgx.iterrows():
+      v = row.EvidenceScore
+      if v >= 25:
+        cat_pgx.loc[index, 'EvidenceLevel'] = '1'
       elif v >= 8 and v < 25:
-        correspond_level.append('2')
-      elif v >= 0 and v < 8:
-        correspond_level.append('3')
-      elif v >= 0:
-        correspond_level.append('4')
-    drug_score_summary[cat] = drug_score.to_dict()
-    drug_score_summary['%s.Level' % cat] = dict(zip(drug_score.keys(), correspond_level))
-  
-  # Output table 2
-  drug_score_df = pd.DataFrame(drug_score_summary)
-  
-  # Output table 3
-  levels = ['1A', '1B', '2', '3', '4'] # Row
-  level_categories = ['Toxicity.Level', 'Dosage.Level', 'Efficacy.Level', 'Metabolism/PK.Level', 'Other.Level'] # Column
-  
-  table_res = []
-  for i in levels:
-    line = []
-    for j in level_categories:
-      tmp = drug_score_df[drug_score_df[j] == i].index.to_list()
-      line.append('; '.join(tmp))
-    table_res.append(line)
-  
-  pgx_summary = pd.DataFrame(table_res, columns=categories, index=levels)
+        cat_pgx.loc[index, 'EvidenceLevel'] = '2'
+      else:
+        cat_pgx.loc[index, 'EvidenceLevel'] = '3'
+      x = row.ResponseScore
+      if x > 1:
+        cat_pgx.loc[index, 'Response'] = 'Increased'
+      elif x < 1:
+        cat_pgx.loc[index, 'Response'] = 'Decreased'
+      else:
+        cat_pgx.loc[index, 'Response'] = 'Moderate'
+    pgx_summary = pd.concat([pgx_summary, cat_pgx])
   
   cursor.close()
   conn.close()
   
-  return(clinical_anno_table, drug_score_df, pgx_summary)
+  return(pgx_summary, clinical_anno_table)

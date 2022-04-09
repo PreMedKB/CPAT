@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-from src import genotype_resolution, clinical_annotation, pgx_report
+from src import genotype_resolution, clinical_annotation#, pgx_report
 import getopt, sys
 # import pandas as pd
 # import numpy as np
@@ -11,7 +11,6 @@ import getopt, sys
 def main(argv):
   race = ''
   germline_vcf = ''
-  bed = ''
   outdir = ''
   
   version = '0.1.0'
@@ -23,7 +22,6 @@ def main(argv):
     -r, --race                      Race of the input vcf. There are 9 selections, i.e., African American/Afro-Caribbean, American, 
                                     Central/South Asian, East Asian, European, Latino, Near Eastern, Oceanian, Sub-Saharan African.
     -i, --germline_vcf              Unannotated vcf file, preferably germline variant.
-    -b, --bed                       Bed file for WES and panel genetic test data.
     -o, --outdir TEXT               Create report in the specified output path.
     --version                       Show the version and exit.
     -h, --help                      Show this message and exit.
@@ -31,7 +29,7 @@ def main(argv):
 
   try:
     opts, args = getopt.getopt(
-      argv, "hvr:i:b:o", ["help", "version", "race=", "germline_vcf=", "bed=", "outdir="])
+      argv, "hvr:i:o", ["help", "version", "race=", "germline_vcf=", "outdir="])
   except getopt.GetoptError:
     print(help)
   for opt, arg in opts:
@@ -48,6 +46,9 @@ def main(argv):
     elif opt in ("-o", "--output"):
       outdir = arg
   
+  germline_vcf = './test/88samples/HG00276.pgx.vcf'
+  race = 'European'
+  outdir = './test/'
   dic_diplotype, dic_rs2gt, hla_subtypes = genotype_resolution.resolution(race, germline_vcf, outdir)
-  clinical_anno_table, drug_score_df, pgx_summary = clinical_annotation.annotation(dic_diplotype, dic_rs2gt, hla_subtypes)
+  pgx_summary, clinical_anno_table = clinical_annotation.annotation(dic_diplotype, dic_rs2gt, hla_subtypes)
   pgx_report.report(race, pgx_summary, clinical_anno_table, outdir)
