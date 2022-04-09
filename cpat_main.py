@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-from src import genotype_resolution, clinical_annotation#, pgx_report
+from src import genotype_resolution, clinical_annotation, pgx_report
 import getopt, sys
 # import pandas as pd
 # import numpy as np
@@ -48,7 +48,10 @@ def main(argv):
   
   germline_vcf = './test/88samples/HG00276.pgx.vcf'
   race = 'European'
-  outdir = './test/'
-  dic_diplotype, dic_rs2gt, hla_subtypes = genotype_resolution.resolution(race, germline_vcf, outdir)
-  pgx_summary, clinical_anno_table = clinical_annotation.annotation(dic_diplotype, dic_rs2gt, hla_subtypes)
-  pgx_report.report(race, pgx_summary, clinical_anno_table, outdir)
+  outdir = './test/88samples_res/'.strip('/')
+  basename = germline_vcf.split('/')[-1].split('.')[0]
+  try{
+    dic_diplotype, dic_rs2gt, hla_subtypes = genotype_resolution.resolution(race, germline_vcf, outdir)
+    pgx_summary, clinical_anno_table = clinical_annotation.annotation(dic_diplotype, dic_rs2gt, hla_subtypes)
+    pgx_report.report(race, pgx_summary, clinical_anno_table, outdir, basename)
+  }

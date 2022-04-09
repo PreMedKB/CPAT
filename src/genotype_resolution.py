@@ -1,5 +1,5 @@
 from src import predict_diplotype
-import getopt, sys, sqlite3, re, toml
+import re, os
 import pandas as pd
 import numpy as np
 from pybedtools import BedTool
@@ -36,6 +36,7 @@ def resolution(race, germline_vcf, outdir):
                "CYP3A4", "CYP3A5", "CYP4F2", "DPYD", "G6PD", "MT-RNR1", "NUDT15",
                "RYR1", "SLCO1B1", "TPMT", "UGT1A1", "VKORC1"]
   dic_diplotype = predict_diplotype.predict(fp, race, gene_list)
+  os.system('rm %s' % fp)
   
   ## Class 2: HLA genes
   # hla_genes = ["HLA-B", "HLA-A", "HLA-C", "HLA-DRB1", "HLA-DQB1", "HLA-DPB1", "HLA-DQA1", "HLA-DRB3"]

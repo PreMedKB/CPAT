@@ -54,12 +54,12 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   # Fetch data from CPAT database     EvidenceLevel != 3 AND EvidenceLevel != 4 AND \
   res1 = cursor.execute("SELECT Gene, VariantOrHaplotype, Drug, Phenotypes, EvidenceLevel, Score, PhenotypeCategoryID, GenotypeOrAllele, Annotation, Function, URL, SpecialtyPopulation FROM ClinAnn WHERE ID IN (%s);" % ','.join([str(i) for i in anno_ids_multi]))
   res1 = cursor.fetchall()
-  res1_df = pd.DataFrame(res1, columns=["Gene", "Variant", "Drug", "Phenotypes", "EvidenceLevel", "EvidenceScore", "PhenotypeCategoryID", "Alleles", "Annotation", "Function", "URL", "Pediatric", "LevelModifier", "LevelOverride"])
+  res1_df = pd.DataFrame(res1, columns=["Gene", "Variant", "Drug", "Phenotypes", "EvidenceLevel", "EvidenceScore", "PhenotypeCategoryID", "Alleles", "Annotation", "Function", "URL", "Pediatric"])
   res1_df['Class'] = 'Diplotype'
 
   res2 = cursor.execute("SELECT Gene, VariantOrHaplotype, Drug, Phenotypes, EvidenceLevel, Score, PhenotypeCategoryID, GenotypeOrAllele, Annotation, Function, URL, SpecialtyPopulation FROM ClinAnn WHERE ID IN (%s);" % ','.join([str(i) for i in anno_ids_single]))
   res2 = cursor.fetchall()
-  res2_df = pd.DataFrame(res2, columns=["Gene", "Variant", "Drug", "Phenotypes", "EvidenceLevel", "EvidenceScore", "PhenotypeCategoryID", "Alleles", "Annotation", "Function", "URL", "Pediatric", "LevelModifier", "LevelOverride"])
+  res2_df = pd.DataFrame(res2, columns=["Gene", "Variant", "Drug", "Phenotypes", "EvidenceLevel", "EvidenceScore", "PhenotypeCategoryID", "Alleles", "Annotation", "Function", "URL", "Pediatric"])
   res2_df['Class'] = 'Single'
   res_df = pd.concat([res1_df, res2_df])
   res1_df.shape; res2_df.shape
@@ -98,7 +98,7 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
         cat_pgx.loc[index, 'EvidenceLevel'] = 'B'
       elif v >= 8 and v < 25:
         cat_pgx.loc[index, 'EvidenceLevel'] = 'C'
-      else:
+      elif v >= 0:
         cat_pgx.loc[index, 'EvidenceLevel'] = 'D'
       x = row.ResponseScore
       if x > 1:
@@ -113,3 +113,4 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   conn.close()
   
   return(pgx_summary, clinical_anno_table)
+

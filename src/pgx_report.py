@@ -10,9 +10,8 @@ There three columns of the input dataframe:
 3. Genotype or Diplotype
 """
 
-def report(race, pgx_summary, clinical_anno_table, outdir):
-  #fp = "%stest_v20220407.html" % outdir
-  fp = "./html/air_v20220408.html"
+def report(race, pgx_summary, clinical_anno_table, outdir, basename):
+  fp = "%s/%s.cpat.html" % (outdir, basename)
   with open(fp, 'w+') as f:
     ## Style
     style="""
@@ -22,7 +21,7 @@ def report(race, pgx_summary, clinical_anno_table, outdir):
     <meta charset="UTF-8">
     <title>CPAT Report</title>
     <script src="https://kit.fontawesome.com/e540049a97.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./css/custom.css">
+    <link rel="stylesheet" href="https://raw.githack.com/lyaqing/CPAT/main/html/css/custom.css">
     <ul>
       <p></p>
       <li><a href="#summary"><b>PGx Summary</b></a></li>
@@ -33,6 +32,8 @@ def report(race, pgx_summary, clinical_anno_table, outdir):
       <li><a href="#other">&nbsp;&nbsp;Other</a></li>
       <li><a href="#detail"><b>Dosing Guideline</b></a></li>
       <li><a href="#detail"><b>Genotype Detail</b></a></li>
+      <li><a href="#haplotype/pk">&nbsp;&nbsp;Haplotype/PK</a></li>
+      <li><a href="#snp/indel">&nbsp;&nbsp;SNP/Indel</a></li>
       <li><a href="#about"><b>About</b></a></li>
     </ul>
     <div style="margin-left:15rem;margin-right:0rem;padding:1px 16px;height:1000px;">
@@ -72,19 +73,25 @@ def report(race, pgx_summary, clinical_anno_table, outdir):
     <th><i class="fa-solid fa-square-caret-up"></i> Increased</th>
     </tr>
     <tr>
-      <td bgcolor="#55B979" width="80px"><font color="white"><b>Level 1</b></font></td>
+      <td bgcolor="#10304E" width="80px"><font color="white"><b>Level A</b></font></td>
       <td width="250px">%s</td>
       <td width="250px">%s</td>
       <td width="250px">%s</td>
     </tr>
     <tr>
-      <td bgcolor="#3F72D8" width="80px"><font color="white"><b>Level 2</b></font></td>
+      <td bgcolor="#4F7C58" width="80px"><font color="white"><b>Level B</b></font></td>
       <td width="250px">%s</td>
       <td width="250px">%s</td>
       <td width="250px">%s</td>
     </tr>
     <tr>
-      <td bgcolor="#F5C344" width="80px"><font color="white"><b>Level 3</b></font></td>
+      <td bgcolor="#DAB156" width="80px"><font color="white"><b>Level C</b></font></td>
+      <td width="250px">%s</td>
+      <td width="250px">%s</td>
+      <td width="250px">%s</td>
+    </tr>
+    <tr>
+      <td bgcolor="#761621" width="80px"><font color="white"><b>Level D</b></font></td>
       <td width="250px">%s</td>
       <td width="250px">%s</td>
       <td width="250px">%s</td>
@@ -99,7 +106,7 @@ def report(race, pgx_summary, clinical_anno_table, outdir):
       html_input = []
       cat_pgx = pgx_summary[pgx_summary.PhenotypeCategory == cat]
       response = ['Decreased', 'Moderate', 'Increased']
-      levels = ['1', '2', '3']
+      levels = ['A', 'B', 'C', 'D']
       for level in levels:
         for res in response:
           tmp = cat_pgx[(cat_pgx.Response == res) & (cat_pgx.EvidenceLevel == level)]
@@ -112,11 +119,12 @@ def report(race, pgx_summary, clinical_anno_table, outdir):
       print('<h3 id="%s"><i class="fa-solid %s"></i> %s</h3>' % (cat.lower(), fa[cat], cat), file=f)
       print(table_html%(html_input[0], html_input[1], html_input[2],
                         html_input[3], html_input[4], html_input[5],
-                        html_input[6], html_input[7], html_input[8]), file=f)
+                        html_input[6], html_input[7], html_input[8],
+                        html_input[9], html_input[10], html_input[11]), file=f)
     
     ## Part 3: Genotype
     print('<h2 id="detail">Genotype Details</h2>', file=f)
-    print('<h3>Haplotype/Diplotype predicted by CPAT</h3>', file=f)
+    print('<h3 id="haplotype">Haplotype/Diplotype predicted by CPAT</h3>', file=f)
     print('<p>This subsection provides CPAT predicted haplotypes based on the VCF calls, the haplotype definition table, and the haplotype population frequency table. PharmGKB and CPIC together summarized pharmacogenomic genes with explicit star(*) or named allele information are involved, specifically ABCG2, CACNA1S, CFTR, CYP2B6, CYP2C8, CYP2C9, CYP2C19, CYP3A4, CYP3A5, CYP4F2, DPYD, G6PD, MT-RNR1, NUDT15, RYR1, SLCO1B1, TPMT, UGT1A1, VKORC1.</p>', file=f)
     detail1 = clinical_anno_table[clinical_anno_table.Class == 'Diplotype'].drop(columns=['Class']).reset_index(drop = True)
     header = '<table id="customers" border="1" cellspacing="0">\n<tr><th>ID</th><th>Gene</th><th>Variant</th><th>Alleles</th><th>Drug</th><th>Evidence</th><th>Category</th><th>Function</th></tr>'
@@ -124,8 +132,8 @@ def report(race, pgx_summary, clinical_anno_table, outdir):
       header = header + '\n<tr><td><a href=%s>%s</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (row.URL, index, row.Gene, row.Variant, row.Alleles, row.Drug, row.EvidenceLevel, row.PhenotypeCategory, row.Function)
     header = header + '\n</table>'
     print(header, file=f)
-
-    print('<h3>SNPs/Indels called by VCF</h3>', file=f)
+    
+    print('<h3 id="snp/indel">SNPs/Indels called by VCF</h3>', file=f)
     print('<p>This subsection depends on the VCF calls for the query positions provided. CPAT does not assume any reference calls for missing positions in the submitted VCF; all missing query positions are not considered in the allele determination process.</p>', file=f)
     detail2 = clinical_anno_table[clinical_anno_table.Class == 'Single'].drop(columns=['Class']).reset_index(drop = True)
     header = '<table id="customers" border="1" cellspacing="0">\n<tr><th>ID</th><th>Gene</th><th>Variant</th><th>Alleles</th><th>Drug</th><th>Evidence</th><th>Category</th><th>Function</th></tr>'
