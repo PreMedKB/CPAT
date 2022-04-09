@@ -23,78 +23,19 @@ def report(race, pgx_summary, clinical_anno_table, outdir):
     <title>CPAT Report</title>
     <script src="https://kit.fontawesome.com/e540049a97.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/custom.css">
-    <style>
-      #customers {
-      font-family: Arial, Helvetica, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-      }
-
-      #customers td, #customers th {
-        border: 1px solid #ddd;
-        padding: 8px;
-      }
-
-      #customers tr:nth-child(even){background-color: #f2f2f2;}
-
-      #customers tr:hover {background-color: #ddd;}
-
-      #customers th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: center;
-        color: #44308d;
-      }
-
-      /* Full-height Fixed Vertical Navbar */
-      body {
-        margin: 0;
-      }
-
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        width: 10%;
-        background-color: #f1f1f1;
-        position: fixed;
-        height: 100%;
-        overflow: auto;
-      }
-
-      li a {
-        display: block;
-        color: #000;
-        padding: 8px 16px;
-        text-decoration: none;
-      }
-
-      li a.active {
-        background-color: #04AA6D;
-        color: white;
-      }
-
-      li a:hover:not(.active) {
-        background-color: #555;
-        color: white;
-      }
-    </style>
-    </head>
-    <body>
     <ul>
-      <li><a href="#summary">Summary</a></li>
-        <ul>
-          <li><a href="#toxicity">Toxicity</a></li>
-          <li><a href="#dosage">Dosage</a></li>
-          <li><a href="#efficacy">Efficacy</a></li>
-          <li><a href="#metabolism/pk">Metabolism/PK</a></li>
-          <li><a href="#other">Other</a></li>
-        </ul>
-      <li><a href="#detail">Detail</a></li>
-      <li><a href="#about">About</a></li>
+      <p></p>
+      <li><a href="#summary"><b>PGx Summary</b></a></li>
+      <li><a href="#toxicity">&nbsp;&nbsp;Toxicity</a></li>
+      <li><a href="#dosage">&nbsp;&nbsp;Dosage</a></li>
+      <li><a href="#efficacy">&nbsp;&nbsp;Efficacy</a></li>
+      <li><a href="#metabolism/pk">&nbsp;&nbsp;Metabolism/PK</a></li>
+      <li><a href="#other">&nbsp;&nbsp;Other</a></li>
+      <li><a href="#detail"><b>Dosing Guideline</b></a></li>
+      <li><a href="#detail"><b>Genotype Detail</b></a></li>
+      <li><a href="#about"><b>About</b></a></li>
     </ul>
-
-    <div style="margin-left:20%;padding:1px 16px;height:1000px;">
+    <div style="margin-left:15rem;margin-right:0rem;padding:1px 16px;height:1000px;">
     """
     print(style, file=f)
 
@@ -106,6 +47,14 @@ def report(race, pgx_summary, clinical_anno_table, outdir):
   </blockquote>
     """
     print(basic_info%(time.asctime(time.localtime(time.time())), race), file=f)
+
+    ## Part 1: Sort disclaimer
+    disclaimer_short = """
+  <div class="alert alert-info">
+    <em>Disclaimer:</em> CPAT reports are subject to iteration as the release version changes. In the current release you should only use this software to assess whether the CPAT executable will compile and run properly on your system. CPAT can only generate recommendations based on information from the imported software, so all information in the reports section is interpreted directly from the uploaded vcf file. Users recognise that they are using CPAT at their own risk.
+  </div>
+    """
+    print(disclaimer_short, file=f)
 
     ## Part 2: Pharmacogenomics Annotation
     part2_header = """
@@ -144,6 +93,7 @@ def report(race, pgx_summary, clinical_anno_table, outdir):
   """
     
     categories = ['Toxicity', 'Dosage', 'Efficacy', 'Metabolism/PK', 'Other']
+    fa = dict(zip(categories, ['fa-skull-crossbones', 'fa-pills', 'fa-vial-circle-check', 'fa-disease', 'fa-feather-pointed']))
     for cat in categories:
       i = 0
       html_input = []
@@ -159,26 +109,28 @@ def report(race, pgx_summary, clinical_anno_table, outdir):
             html_input.append('; '.join(tmp.index.to_list()))
           i = i+1
       # print
-      print('<h3 id="%s">%s</h3>' % (cat.lower(), cat), file=f)
+      print('<h3 id="%s"><i class="fa-solid %s"></i> %s</h3>' % (cat.lower(), fa[cat], cat), file=f)
       print(table_html%(html_input[0], html_input[1], html_input[2],
                         html_input[3], html_input[4], html_input[5],
                         html_input[6], html_input[7], html_input[8]), file=f)
     
     ## Part 3: Genotype
-    print('<h2 id="detail">Pharmacogenomics Details</h2>', file=f)
-    print('<h3>Diplotypes predicted by CPAT</h3>', file=f)
+    print('<h2 id="detail">Genotype Details</h2>', file=f)
+    print('<h3>Haplotype/Diplotype predicted by CPAT</h3>', file=f)
+    print('<p>This subsection provides CPAT predicted haplotypes based on the VCF calls, the haplotype definition table, and the haplotype population frequency table. PharmGKB and CPIC together summarized pharmacogenomic genes with explicit star(*) or named allele information are involved, specifically ABCG2, CACNA1S, CFTR, CYP2B6, CYP2C8, CYP2C9, CYP2C19, CYP3A4, CYP3A5, CYP4F2, DPYD, G6PD, MT-RNR1, NUDT15, RYR1, SLCO1B1, TPMT, UGT1A1, VKORC1.</p>', file=f)
     detail1 = clinical_anno_table[clinical_anno_table.Class == 'Diplotype'].drop(columns=['Class']).reset_index(drop = True)
-    header = '<table id="customers" border="1" cellspacing="0">\n<tr><th>ID</th><th>Gene</th><th>Variant</th><th>Drug</th><th>Phenotypes</th><th>Evidence</th><th>Alleles</th><th>Category</th><th>Function</th></tr>'
+    header = '<table id="customers" border="1" cellspacing="0">\n<tr><th>ID</th><th>Gene</th><th>Variant</th><th>Alleles</th><th>Drug</th><th>Evidence</th><th>Category</th><th>Function</th></tr>'
     for index, row in detail1.iterrows():
-      header = header + '\n<tr><td><a href=%s>%s</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (row[9], index, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[8])
+      header = header + '\n<tr><td><a href=%s>%s</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (row.URL, index, row.Gene, row.Variant, row.Alleles, row.Drug, row.EvidenceLevel, row.PhenotypeCategory, row.Function)
     header = header + '\n</table>'
     print(header, file=f)
 
-    print('<h3>Genotypes called by VCF</h3>', file=f)
+    print('<h3>SNPs/Indels called by VCF</h3>', file=f)
+    print('<p>This subsection depends on the VCF calls for the query positions provided. CPAT does not assume any reference calls for missing positions in the submitted VCF; all missing query positions are not considered in the allele determination process.</p>', file=f)
     detail2 = clinical_anno_table[clinical_anno_table.Class == 'Single'].drop(columns=['Class']).reset_index(drop = True)
-    header = '<table id="customers" border="1" cellspacing="0">\n<tr><th>ID</th><th>Gene</th><th>Variant</th><th>Drug</th><th>Phenotypes</th><th>Evidence</th><th>Alleles</th><th>Category</th><th>Function</th></tr>'
+    header = '<table id="customers" border="1" cellspacing="0">\n<tr><th>ID</th><th>Gene</th><th>Variant</th><th>Alleles</th><th>Drug</th><th>Evidence</th><th>Category</th><th>Function</th></tr>'
     for index, row in detail2.iterrows():
-      header = header + '\n<tr><td><a href=%s>%s</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (row[9], index, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[8])
+      header = header + '\n<tr><td><a href=%s>%s</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (row.URL, index, row.Gene, row.Variant, row.Alleles, row.Drug, row.EvidenceLevel, row.PhenotypeCategory, row.Function)
     header = header + '\n</table>'
     print(header, file=f)
     
