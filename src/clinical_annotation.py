@@ -95,7 +95,7 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   ## Level A
   a1 = cursor.execute("SELECT DISTINCT GeneID, DrugID from ClinAnn WHERE EvidenceLevel = '1A';")
   a1 = cursor.fetchall(); a1 = pd.DataFrame(a1, columns = ['GeneID', 'DrugID'])
-  a2 = cursor.execute("SELECT DISTINCT RelatedGeneID,RelatedDrugID FROM ClinDosingGuideline;")
+  a2 = cursor.execute("SELECT DISTINCT RelatedGeneID,RelatedDrugID FROM ClinDosingGuideline WHERE Annotation NOT LIKE '%There are currently no%';")
   a2 = cursor.fetchall(); a2 = pd.DataFrame(a2, columns = ['GeneID', 'DrugID'])
   level_a = pd.concat([a1, a2], axis=0).drop_duplicates()
   a1.shape; a2.shape; level_a.shape # 119, 220, 237

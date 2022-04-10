@@ -239,7 +239,7 @@ p {
 #customers tr:hover {background-color: #ddd;}
 
 #customers th {
-  color: #44308d;
+  color: #000000;
 }
 
 /* Full-height Fixed Vertical Navbar */
@@ -261,10 +261,10 @@ li a {
   padding: 8px 16px;
   text-decoration: none;
 }
-/* li a.active {
-  background-color: #04AA6D;
+li a.active {
+  background-color: #5097d5;
   color: white;
-} */
+}
 li a:hover:not(.active) {
   background-color: #5097d5;
   color: white;
