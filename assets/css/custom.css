@@ -238,10 +238,6 @@ p {
 
 #customers tr:hover {background-color: #ddd;}
 
-#customers th {
-  color: #000000;
-}
-
 /* Full-height Fixed Vertical Navbar */
 body {
   margin: 0;
