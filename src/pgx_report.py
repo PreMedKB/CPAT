@@ -51,8 +51,8 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
 
     ## Part 1: Sort disclaimer
     disclaimer_short = """
-  <div class="alert alert-info-yellow">
-    <em><b>Disclaimer:</b></em> CPAT reports are subject to iteration as the release version changes. In the current release you should only use this software to assess whether the CPAT executable will compile and run properly on your system. CPAT can only generate recommendations based on information from the imported software, so all information in the reports section is interpreted directly from the uploaded vcf file. Users recognise that they are using CPAT at their own risk.
+  <div class="alert alert-info-red">
+    <em><b>Disclaimer:</b></em> The CPAT report iterates as the release version changes. In the current release, you should only use it to evaluate whether CPAT will compile and run properly on your system. All information in the CPAT report is interpreted directly from the uploaded VCF file. Users recognise that they are using CPAT at their own risk.
   </div>
     """
     print(disclaimer_short, file=f)
@@ -90,9 +90,12 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
     categories = ['Toxicity', 'Dosage', 'Efficacy', 'Metabolism/PK', 'Other']
     fa = dict(zip(categories, ['fa-skull-crossbones', 'fa-pills', 'fa-vial-circle-check', 'fa-disease', 'fa-feather-pointed']))
     for cat in categories:
+      print('<h3 id="%s"><i class="fa-solid %s"></i> %s</h3>' % (cat.lower(), fa[cat], cat), file=f)
       i = 0
       html_input = []
       cat_pgx = pgx_summary[pgx_summary.PhenotypeCategory == cat]
+      if cat_pgx.empty:
+        print('<div class="alert alert-info-yellow">No clinical annotations matched for this category.</div>', file=f)
       response = ['Decreased', 'Moderate', 'Increased']
       levels = ['A', 'B']
       for level in levels:
@@ -103,8 +106,6 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
           else:
             html_input.append('; '.join(tmp.index.to_list()))
           i = i+1
-      # print
-      print('<h3 id="%s"><i class="fa-solid %s"></i> %s</h3>' % (cat.lower(), fa[cat], cat), file=f)
       print(table_html%(html_input[0], html_input[1], html_input[2],
                         html_input[3], html_input[4], html_input[5]), file=f)
     
