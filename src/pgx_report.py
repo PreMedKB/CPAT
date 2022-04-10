@@ -52,7 +52,7 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
     ## Part 1: Sort disclaimer
     disclaimer_short = """
   <div class="alert alert-info-yellow">
-    <em>Disclaimer:</em> CPAT reports are subject to iteration as the release version changes. In the current release you should only use this software to assess whether the CPAT executable will compile and run properly on your system. CPAT can only generate recommendations based on information from the imported software, so all information in the reports section is interpreted directly from the uploaded vcf file. Users recognise that they are using CPAT at their own risk.
+    <em><b>Disclaimer:</b></em> CPAT reports are subject to iteration as the release version changes. In the current release you should only use this software to assess whether the CPAT executable will compile and run properly on your system. CPAT can only generate recommendations based on information from the imported software, so all information in the reports section is interpreted directly from the uploaded vcf file. Users recognise that they are using CPAT at their own risk.
   </div>
     """
     print(disclaimer_short, file=f)
