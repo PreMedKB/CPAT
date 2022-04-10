@@ -266,6 +266,6 @@ li a {
   color: white;
 } */
 li a:hover:not(.active) {
-  background-color: #555;
+  background-color: #5097d5;
   color: white;
 }

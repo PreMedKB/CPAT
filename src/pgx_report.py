@@ -21,7 +21,7 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
     <meta charset="UTF-8">
     <title>CPAT Report</title>
     <script src="https://kit.fontawesome.com/e540049a97.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://raw.githack.com/lyaqing/CPAT/main/html/css/custom.css">
+    <link rel="stylesheet" href="https://raw.githack.com/lyaqing/CPAT/main/assets/css/custom.css">
     <ul>
       <p></p>
       <li><a href="#summary"><b>PGx Summary</b></a></li>
