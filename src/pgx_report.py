@@ -10,7 +10,7 @@ There three columns of the input dataframe:
 3. Genotype or Diplotype
 """
 
-def report(race, pgx_summary, clinical_anno_table, outdir, basename):
+def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdir, basename):
   fp = "%s/%s.cpat.html" % (outdir, basename)
   with open(fp, 'w+') as f:
     ## Style
@@ -32,7 +32,7 @@ def report(race, pgx_summary, clinical_anno_table, outdir, basename):
       <li><a href="#other">&nbsp;&nbsp;Other</a></li>
       <li><a href="#guideline"><b>Dosing Guideline</b></a></li>
       <li><a href="#detail"><b>Genotype Detail</b></a></li>
-      <li><a href="#haplotype/pk">&nbsp;&nbsp;Haplotype/PK</a></li>
+      <li><a href="#haplotype">&nbsp;&nbsp;Haplotype/Diplotype</a></li>
       <li><a href="#snp/indel">&nbsp;&nbsp;SNP/Indel</a></li>
       <li><a href="#about"><b>About</b></a></li>
     </ul>
@@ -51,7 +51,7 @@ def report(race, pgx_summary, clinical_anno_table, outdir, basename):
 
     ## Part 1: Sort disclaimer
     disclaimer_short = """
-  <div class="alert alert-info">
+  <div class="alert alert-info-yellow">
     <em>Disclaimer:</em> CPAT reports are subject to iteration as the release version changes. In the current release you should only use this software to assess whether the CPAT executable will compile and run properly on your system. CPAT can only generate recommendations based on information from the imported software, so all information in the reports section is interpreted directly from the uploaded vcf file. Users recognise that they are using CPAT at their own risk.
   </div>
     """
@@ -73,25 +73,13 @@ def report(race, pgx_summary, clinical_anno_table, outdir, basename):
     <th><i class="fa-solid fa-square-caret-up"></i> Increased</th>
     </tr>
     <tr>
-      <td bgcolor="#10304E" width="80px"><font color="white"><b>Level A</b></font></td>
+      <td bgcolor="#55B979" width="80px"><font color="white"><b>Level A</b></font></td>
       <td width="250px">%s</td>
       <td width="250px">%s</td>
       <td width="250px">%s</td>
     </tr>
     <tr>
-      <td bgcolor="#4F7C58" width="80px"><font color="white"><b>Level B</b></font></td>
-      <td width="250px">%s</td>
-      <td width="250px">%s</td>
-      <td width="250px">%s</td>
-    </tr>
-    <tr>
-      <td bgcolor="#DAB156" width="80px"><font color="white"><b>Level C</b></font></td>
-      <td width="250px">%s</td>
-      <td width="250px">%s</td>
-      <td width="250px">%s</td>
-    </tr>
-    <tr>
-      <td bgcolor="#761621" width="80px"><font color="white"><b>Level D</b></font></td>
+      <td bgcolor="#3F72D8" width="80px"><font color="white"><b>Level B</b></font></td>
       <td width="250px">%s</td>
       <td width="250px">%s</td>
       <td width="250px">%s</td>
@@ -106,7 +94,7 @@ def report(race, pgx_summary, clinical_anno_table, outdir, basename):
       html_input = []
       cat_pgx = pgx_summary[pgx_summary.PhenotypeCategory == cat]
       response = ['Decreased', 'Moderate', 'Increased']
-      levels = ['A', 'B', 'C', 'D']
+      levels = ['A', 'B']
       for level in levels:
         for res in response:
           tmp = cat_pgx[(cat_pgx.Response == res) & (cat_pgx.EvidenceLevel == level)]
@@ -118,14 +106,26 @@ def report(race, pgx_summary, clinical_anno_table, outdir, basename):
       # print
       print('<h3 id="%s"><i class="fa-solid %s"></i> %s</h3>' % (cat.lower(), fa[cat], cat), file=f)
       print(table_html%(html_input[0], html_input[1], html_input[2],
-                        html_input[3], html_input[4], html_input[5],
-                        html_input[6], html_input[7], html_input[8],
-                        html_input[9], html_input[10], html_input[11]), file=f)
+                        html_input[3], html_input[4], html_input[5]), file=f)
     
     ## Part 3: Dosing Guideline
     print('<h2 id="guideline">Dosing Guidelines</h2>', file=f)
+    print('<p>CPAT integrates brief annotations of genotype-based dosing recommendations after PharmGKB processing. Original PGx-based drug dosing guidelines include the <a href="http://cpicpgx.org/">Clinical Pharmacogenetics Implementation Consortium</a> (CPIC), the <a href="https://www.knmp.nl/dossiers/farmacogenetica/">Royal Dutch Association for the Advancement of Pharmacy - Pharmacogenetics Working Group</a> (DPWG), the <a href="https://cpnds.ubc.ca/">Canadian Pharmacogenomics Network for Drug Safety</a> (CPNDS), the French National Network for Pharmacogenetics (RNPGx), The Australian and New Zealand consensus guidelines (AusNZ), the Spanish Pharmacogenetics and Pharmacogenomics Society (SEFF), the Cystic Fibrosis Foundation (CFF), the American College of Rheumatology.</p>', file=f)
+    # Drug
+    ## Detected variant or alleles
+    ### Dosing guidelines
+    for drug in list(dosing_guideline_table.Drug.drop_duplicates()):
+      print('<h3>%s</h3>' % drug, file=f)
+      drug_sub = dosing_guideline_table[dosing_guideline_table.Drug == drug]
+      for gene in list(drug_sub.Gene.drop_duplicates()):
+        print('<h4>%s</h4>' % gene, file=f)
+        drug_by_gene = drug_sub[drug_sub.Gene == gene]
+        drug_by_gene['Report'] = drug_by_gene.Variant.str.cat(drug_by_gene.Alleles, sep=": ")
+        print('<p><font color="#444">Detected alleles: %s</font></p>' % "; ".join(list(drug_by_gene.Report.drop_duplicates())), file=f)
+        drug_guide = drug_by_gene[['DosingURL', 'DosingSource', 'DosingAnnotation']].drop_duplicates()
+        for index, row in drug_guide.iterrows():
+          print('<p><a href=%s><i class="fa-solid fa-circle-info"></a></i><b> %s: </b>%s</p>' % (row.DosingURL, row.DosingSource, row.DosingAnnotation), file=f)
     
-
     ## Part 4: Genotype Details
     print('<h2 id="detail">Genotype Details</h2>', file=f)
     print('<h3 id="haplotype">Haplotype/Diplotype predicted by CPAT</h3>', file=f)

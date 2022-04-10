@@ -27,9 +27,9 @@ for vcf in test_vcfs:
     ### Run CPAT
     dic_diplotype, dic_rs2gt, hla_subtypes = genotype_resolution.resolution(race, germline_vcf, outdir)
     # pgx_summary, clinical_anno_table = clinical_annotation.annotation(dic_diplotype, dic_rs2gt, hla_subtypes)
-    pgx_summary, clinical_anno_table = annotation(dic_diplotype, dic_rs2gt, hla_subtypes)
+    pgx_summary, clinical_anno_table, dosing_guideline_table = annotation(dic_diplotype, dic_rs2gt, hla_subtypes)
     clinical_anno_table['Sample'] = basename
-    #pgx_report.report(race, pgx_summary, clinical_anno_table, outdir, basename)
+    #pgx_report.report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdir, basename)
     annotation_df = pd.concat([annotation_df, clinical_anno_table], axis=0)
     merged_score_df = pd.concat([merged_score_df, pgx_summary], axis=0)
 

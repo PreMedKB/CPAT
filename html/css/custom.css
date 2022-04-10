@@ -197,18 +197,31 @@ p {
 
 
 /* Box */
-.alert-info {
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-  color: #3a87ad;
-  text-align: justify;
-}
 .alert {
   margin: 1em 0;
   padding: 0.6em;
   border-radius: 4px;
   text-shadow: 0 1px 0 rgb(255 255 255 / 50%);
 }
+.alert-info-red {
+  background-color: #EAD6D5;
+  border-color: #EFDFDE;
+  color: #7C3A37;
+  text-align: justify;
+}
+.alert-info-yellow {
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+  color: #8a6d3b;
+  text-align: justify;
+}
+.alert-info-blue {
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  color: #3a87ad;
+  text-align: justify;
+}
+
 
 /* Table */
 #customers {

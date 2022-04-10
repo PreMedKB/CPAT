@@ -52,6 +52,6 @@ def main(argv):
   basename = germline_vcf.split('/')[-1].split('.')[0]
   try{
     dic_diplotype, dic_rs2gt, hla_subtypes = genotype_resolution.resolution(race, germline_vcf, outdir)
-    pgx_summary, clinical_anno_table = clinical_annotation.annotation(dic_diplotype, dic_rs2gt, hla_subtypes)
-    pgx_report.report(race, pgx_summary, clinical_anno_table, outdir, basename)
+    pgx_summary, clinical_anno_table, dosing_guideline_table = clinical_annotation.annotation(dic_diplotype, dic_rs2gt, hla_subtypes)
+    pgx_report.report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdir, basename)
   }
