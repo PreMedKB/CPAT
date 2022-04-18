@@ -24,6 +24,7 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
     <link rel="stylesheet" href="https://raw.githack.com/lyaqing/CPAT/main/assets/css/custom.css">
     <ul>
       <p></p>
+      <li><a href="#home"><b>Home</b></a></li>
       <li><a href="#summary"><b>PGx Summary</b></a></li>
       <li><a href="#toxicity">&nbsp;&nbsp;Toxicity</a></li>
       <li><a href="#dosage">&nbsp;&nbsp;Dosage</a></li>
@@ -42,50 +43,50 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
 
     ## Part 0: Basic information
     basic_info = """
-  <h1>CPAT Report</h1>
-  <blockquote>
-    <p><b>Report Time:</b> %s<br><b>Biogeographic Group:</b> %s</p>
-  </blockquote>
+    <h1 id="home">CPAT Report</h1>
+    <blockquote>
+      <p><b>Report Time:</b> %s<br><b>Biogeographic Group:</b> %s</p>
+    </blockquote>
     """
     print(basic_info%(time.asctime(time.localtime(time.time())), race), file=f)
 
     ## Part 1: Sort disclaimer
     disclaimer_short = """
-  <div class="alert alert-info-yellow">
-    <em><b>Disclaimer:</b></em> The CPAT report iterates as the release version changes. In the current release, you should only use it to evaluate whether CPAT will compile and run properly on your system. All information in the CPAT report is interpreted directly from the uploaded VCF file. Users recognise that they are using CPAT at their own risk.
-  </div>
+    <div class="alert alert-info-yellow">
+      <em><b>Disclaimer:</b></em> The CPAT report iterates as the release version changes. In the current release, you should only use it to evaluate whether CPAT will compile and run properly on your system. All information in the CPAT report is interpreted directly from the uploaded VCF file. Users recognise that they are using CPAT at their own risk.
+    </div>
     """
     print(disclaimer_short, file=f)
 
     ## Part 2: Pharmacogenomics Annotation
     part2_header = """
-  <h2 id="summary">Pharmacogenomics Summary</h2>
-  <p>CPAT calculated the effect scores of the drugs of interest in the five phenotype categories based on the genotypes obtained from the analysis. Evidence levels 1A, 1B, 2, 3, and 4 are used to indicate the degree of influence of a drug on a particular drug response.</p>
+    <h2 id="summary">Pharmacogenomics Summary</h2>
+    <p>CPAT combines genotypes with PharmGKB's clinical annotations to summarise a patient's response to a specific drug across five dimensions, including <font color="#000"><b>toxicity</b></font>, <font color="#000"><b>dosage</b></font>, <font color="#000"><b>efficacy</b></font>, <font color="#000"><b>metabolism/PK</b></font> and <font color="#000"><b>other</b></font>. Response levels are indicated using <font color="#8E529A"><b>decreased</b></font>, <font color="#653F92"><b>moderate</b></font> and <font color="#44308d"><b>increased</b></font>.<br>CPAT labels results with variant-specific prescribing guidance in professional clinical guidelines or FDA-approved drug label annotations as <font color="#54A052"><b>Level A</b></font>, and otherwise as <font color="#3978B1"><b>Level B</b></font>.</p>
     """
     print(part2_header, file=f)
     
     table_html = """
-  <table id="customers" border="1" cellspacing="0">
-    <tr>
-    <th bgcolor="#ffffff"></th>
-    <th><font color="#A88DB3"><i class="fa-solid fa-square-caret-down"></i> Decreased</font></th>
-    <th><font color="#8E529A"><i class="fa-solid fa-square-minus"></i> Moderate</font></th>
-    <th><font color="#44308d"><i class="fa-solid fa-square-caret-up"></i> Increased</font></th>
-    </tr>
-    <tr>
-      <td bgcolor="#54A052" width="80px"><font color="white"><b>Level A</b></font></td>
-      <td width="250px">%s</td>
-      <td width="250px">%s</td>
-      <td width="250px">%s</td>
-    </tr>
-    <tr>
-      <td bgcolor="#3978B1" width="80px"><font color="white"><b>Level B</b></font></td>
-      <td width="250px">%s</td>
-      <td width="250px">%s</td>
-      <td width="250px">%s</td>
-    </tr>
-  </table>
-  """
+    <table id="customers" border="1" cellspacing="0">
+      <tr>
+      <th bgcolor="#ffffff"></th>
+      <th><font color="#8E529A"><i class="fa-solid fa-square-caret-down"></i> Decreased</font></th>
+      <th><font color="#653F92"><i class="fa-solid fa-square-minus"></i> Moderate</font></th>
+      <th><font color="#44308d"><i class="fa-solid fa-square-caret-up"></i> Increased</font></th>
+      </tr>
+      <tr>
+        <td bgcolor="#54A052" width="80px"><font color="white"><b>Level A</b></font></td>
+        <td width="250px">%s</td>
+        <td width="250px">%s</td>
+        <td width="250px">%s</td>
+      </tr>
+      <tr>
+        <td bgcolor="#3978B1" width="80px"><font color="white"><b>Level B</b></font></td>
+        <td width="250px">%s</td>
+        <td width="250px">%s</td>
+        <td width="250px">%s</td>
+      </tr>
+    </table>
+    """
     
     categories = ['Toxicity', 'Dosage', 'Efficacy', 'Metabolism/PK', 'Other']
     fa = dict(zip(categories, ['fa-skull-crossbones', 'fa-pills', 'fa-vial-circle-check', 'fa-disease', 'fa-feather-pointed']))
@@ -95,7 +96,7 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
       html_input = []
       cat_pgx = pgx_summary[pgx_summary.PhenotypeCategory == cat]
       if cat_pgx.empty:
-        print('<div class="alert alert-info-yellow">No clinical annotations matched for this category.</div>', file=f)
+        print('<div class="alert alert-info-red">No clinical annotations matched for this category.</div>', file=f)
       else:
         response = ['Decreased', 'Moderate', 'Increased']
         levels = ['A', 'B']
@@ -154,15 +155,16 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
     
     # Part 4: Disclaimers
     disclaimer = """
-  <h2 id="about">Disclaimers</h2>
-  <p>The report incorporates analyses of peer-reviewed studies and other publicly available information identified by CPAT by State Key Laboratory of Genetic Engineering from the School of Life Sciences and Human Phenome Institute, Fudan University, Shanghai, China. These analyses and information may include associations between a molecular alteration (or lack of alteration) and one or more drugs with potential clinical benefit (or potential lack of clinical benefit), including drug candidates that are being studied in clinical research.<br>
-  Note: A finding of biomarker alteration does not necessarily indicate pharmacologic effectiveness (or lack thereof) of any drug or treatment regimen; a finding of no biomarker alteration does not necessarily indicate lack of pharmacologic effectiveness (or effectiveness) of any drug or treatment regimen.<br>
-  No Guarantee of Clinical Benefit: This Report makes no promises or guarantees that a particular drug will be effective in the treatment of disease in any patient. This report also makes no promises or guarantees that a drug with a potential lack of clinical benefit will provide no clinical benefit.<br>
-  Treatment Decisions are Responsibility of Physician: Drugs referenced in this report may not be suitable for a particular patient. The selection of any, all, or none of the drugs associated with potential clinical benefit (or potential lack of clinical benefit) resides entirely within the discretion of the treating physician. Indeed, the information in this report must be considered in conjunction with all other relevant information regarding a particular patient, before the patient's treating physician recommends a course of treatment. Decisions on patient care and treatment must be based on the independent medical judgment of the treating physician, taking into consideration all applicable information concerning the patient's condition, such as patient and family history, physical examinations, information from other diagnostic tests, and patient preferences, following the standard of care in a given community. A treating physician's decisions should not be based on a single test, such as this test or the information contained in this report.<br>
-  When using results obtained from CPAT, you agree to cite CPAT.<br><br>
-  </p>
-  </div>
-  </body>
-  </html>"""
+    <h2 id="about">Disclaimers</h2>
+    <p>The report incorporates analyses of peer-reviewed studies and other publicly available information identified by CPAT by State Key Laboratory of Genetic Engineering from the School of Life Sciences and Human Phenome Institute, Fudan University, Shanghai, China. These analyses and information may include associations between a molecular alteration (or lack of alteration) and one or more drugs with potential clinical benefit (or potential lack of clinical benefit), including drug candidates that are being studied in clinical research.<br>
+    Note: A finding of biomarker alteration does not necessarily indicate pharmacologic effectiveness (or lack thereof) of any drug or treatment regimen; a finding of no biomarker alteration does not necessarily indicate lack of pharmacologic effectiveness (or effectiveness) of any drug or treatment regimen.<br>
+    No Guarantee of Clinical Benefit: This Report makes no promises or guarantees that a particular drug will be effective in the treatment of disease in any patient. This report also makes no promises or guarantees that a drug with a potential lack of clinical benefit will provide no clinical benefit.<br>
+    Treatment Decisions are Responsibility of Physician: Drugs referenced in this report may not be suitable for a particular patient. The selection of any, all, or none of the drugs associated with potential clinical benefit (or potential lack of clinical benefit) resides entirely within the discretion of the treating physician. Indeed, the information in this report must be considered in conjunction with all other relevant information regarding a particular patient, before the patient's treating physician recommends a course of treatment. Decisions on patient care and treatment must be based on the independent medical judgment of the treating physician, taking into consideration all applicable information concerning the patient's condition, such as patient and family history, physical examinations, information from other diagnostic tests, and patient preferences, following the standard of care in a given community. A treating physician's decisions should not be based on a single test, such as this test or the information contained in this report.<br>
+    When using results obtained from CPAT, you agree to cite CPAT.<br><br>
+    </p>
+    </div>
+    </body>
+    </html>
+    """
     print(disclaimer, file=f)
 

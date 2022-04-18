@@ -1,0 +1,8 @@
+Nucleotide change on cDNA	
+Effect on protein	
+Position at NC_000019.10 (Homo sapiens chromosome 19, GRCh38.p13)	g.39248147C>T
+Position at NG_042193.1 (IFNL3 RefSeqGene)	g.1825G>C
+rsID	rs12979860
+IFNL3 Allele	
+C	C
+T	T

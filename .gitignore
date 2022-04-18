@@ -5,4 +5,4 @@ filter_position.sh
 get_positions.py
 poi_genotype.py
 accuracy.py
-annotation_summary.py
+statistic.py

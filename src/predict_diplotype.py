@@ -54,7 +54,8 @@ dic_gene_ref_haplotype = {
   'SLCO1B1': '*1',
   'TPMT': '*1',
   'UGT1A1': '*1',
-  'VKORC1': 'C'
+  'VKORC1': 'C',
+  'IFNL3': 'C'
 }
 
 
@@ -85,7 +86,6 @@ def phase_alle(allele_definition_table, gene):
   list_ref = []
   index_nonsnp = []
   dic_alle2genotype = {}
-
   with open(allele_definition_table, 'r', encoding='utf-8') as file:
     flag = 0
     for line in file:
@@ -94,8 +94,9 @@ def phase_alle(allele_definition_table, gene):
       flag_judge = info[0]
       if 'GRCh38' in line:
         for i in info:
-          matchobj = re.search(r'\w\.(\d+)(\w)\>(\w)', i)
-          #matchobj = re.search(r'g\.(\d+)(\w)\>(\w)', i)
+          matchobj = re.search(r'\w\.(\d+)(\w*)', i)
+          # The traditional variant will match the following pattern.
+          #matchobj = re.search(r'\w\.(\d+)(\w)\>(\w)', i)
           if matchobj:
             pos.append(matchobj.group(1))
             list_alt.append(matchobj.group(2))
@@ -109,13 +110,14 @@ def phase_alle(allele_definition_table, gene):
               index_nonsnp.append(info.index(i)-1)
               pos.append(info.index(i)-1)
               list_alt.append(info.index(i)-1)
+          print(pos, list_alt)
       
       else:
         if "rsID" in line:
           for i in index_nonsnp:
             pos[i] = info[i+1]
             list_alt[i] = info[i+1]
-
+      
       # Start to process the haplotypes
       if flag == 1:
         alle = info.pop(0)
@@ -205,16 +207,14 @@ def mix_rank(candidate, dic_diplotype2fre, race):
   for key in candidate.keys():
     dip_fre.append(float(dic_diplotype2fre[key][dic_race2col[race]]))
   dip_fre_sorted = sorted(set(dip_fre))
-  
   # Rank the difference of genotype
   cut_gt_sorted = sorted(set(candidate.values()), reverse=True)
-
   # Population rank (bigger is better) - Genotype rank (smaller is better)
   dic_diplotype2score = {}
   for key in candidate.keys():
     fre = float(dic_diplotype2fre[key][dic_race2col[race]])
     # Return index(rank)
-    dic_diplotype2score[key] = dip_fre_sorted.index(fre) - cut_gt_sorted.index(candidate[key])
+    dic_diplotype2score[key] = dip_fre_sorted.index(fre) + cut_gt_sorted.index(candidate[key])
   
   return(dic_diplotype2score)
 
@@ -244,6 +244,7 @@ def phase_diplotype(dic_alle2genotype, gene_genotype, dic_diplotype2fre, race):
         cut_gt.append(1)
       else:
         cut_gt.append(max(cut_gt_tmp))
+    print(cut_gt)
     if len(list(filter(less_than_0, cut_gt))):
       pass
     else:

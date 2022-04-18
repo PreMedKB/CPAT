@@ -5,13 +5,19 @@ Evalute the diplotype population frequency by using Hardy-Weinberg equilibrium.
 import re
 import pandas as pd
 
-gene = ["ABCG2", "CACNA1S", "CFTR", "CYP2B6", "CYP2C8", "CYP2C19", "CYP2C9", "CYP2D6", "CYP3A4", "CYP3A5", "CYP4F2", "DPYD", "G6PD", "MT-RNR1", "NUDT15", "RYR1", "SLCO1B1", "TPMT", "UGT1A1", "VKORC1"]
+gene = ["ABCG2", "CACNA1S", "CFTR", "CYP2B6", "CYP2C8", "CYP2C19", "CYP2C9", "CYP2D6", 
+        "CYP3A4", "CYP3A5", "CYP4F2", "DPYD", "G6PD", "IFNL3", 
+        "MT-RNR1", "NUDT15", "RYR1", "SLCO1B1", "TPMT", "UGT1A1", "VKORC1"]
 
 race = ["African_American_Afro_Caribbean", "American", "Central_South_Asian", "East_Asian", "European", "Latino", "Near_Eastern", "Oceanian", "Sub_Saharan_African"]
 
 for g in gene:
   print (g + "\n")
-  #gene_definition_file = "%s_allele_definition_table.txt" % (g)
+  # Definition
+  gene_definition_file = "./assets/definition/%s_allele_definition_table.txt" % (g)
+  definition = pd.read_csv(gene_definition_file, sep='\t', skiprows=5)
+  haplotypes = definition.iloc[:, 0].to_list()
+  # Frequency
   gene_frequency_file = "./assets/population_frequency/%s_frequency_table.txt" % (g)
   diplotype_frequency_file = "./assets/diplotype_frequency/%s_diplotype_frequency_table.txt" % (g)
   dic_race2dtfq = {}
@@ -22,21 +28,24 @@ for g in gene:
     for line in file:
       if re.search('allele', line, re.IGNORECASE):
         line = line.replace(" ","_").replace("/","_").replace("-","_")
-        print(line.strip(), file = dt_fq)
+        #print(line.strip(), file = dt_fq)
         continue
       line = line.replace("\n","")
       info = line.split("\t")
       hap = info.pop(0)
+      if hap not in haplotypes:
+        continue
       
       for i in range(9):
         if info[i]:
           fre = float(info[i])
         else:
           fre = 0.000001
-        if fre > 0.000001:
-          locals() ['x' + str(i)][hap] = fre
-        else:
-          locals() ['x' + str(i)][hap] = 0.000001
+        # if fre > 0.000001:
+        #   locals() ['x' + str(i)][hap] = fre
+        # else:
+        #   locals() ['x' + str(i)][hap] = 0.000001
+        locals() ['x' + str(i)][hap] = fre
   
   for i in range(9):
     locals() ['d' + str(i)] = {}
@@ -69,3 +78,4 @@ for g in gene:
   race2dtfq = pd.DataFrame(dic_race2dtfq)
   race2dtfq['Global'] = race2dtfq.T.mean()
   race2dtfq.to_csv(diplotype_frequency_file, sep='\t')
+
