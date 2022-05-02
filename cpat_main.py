@@ -3,10 +3,6 @@
 
 from src import genotype_resolution, clinical_annotation, pgx_report
 import getopt, sys
-# import pandas as pd
-# import numpy as np
-# from pybedtools import BedTool
-
 
 def main(argv):
   race = ''
@@ -46,10 +42,6 @@ def main(argv):
     elif opt in ("-o", "--output"):
       outdir = arg
   
-  germline_vcf = './test/88samples/HG00276.pgx.vcf'
-  race = 'European'
-  outdir = './test/88samples_res/'.strip('/')
-  basename = germline_vcf.split('/')[-1].split('.')[0]
   try{
     dic_diplotype, dic_rs2gt, hla_subtypes = genotype_resolution.resolution(race, germline_vcf, outdir)
     pgx_summary, clinical_anno_table, dosing_guideline_table = clinical_annotation.annotation(dic_diplotype, dic_rs2gt, hla_subtypes)

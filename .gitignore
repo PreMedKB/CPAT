@@ -6,3 +6,5 @@ get_positions.py
 poi_genotype.py
 accuracy.py
 statistic.py
+test_88sample.py
+assets/css/*

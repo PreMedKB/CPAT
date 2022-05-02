@@ -30,7 +30,6 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
       <li><a href="#dosage">&nbsp;&nbsp;Dosage</a></li>
       <li><a href="#efficacy">&nbsp;&nbsp;Efficacy</a></li>
       <li><a href="#metabolism/pk">&nbsp;&nbsp;Metabolism/PK</a></li>
-      <li><a href="#other">&nbsp;&nbsp;Other</a></li>
       <li><a href="#guideline"><b>Dosing Guideline</b></a></li>
       <li><a href="#detail"><b>Genotype Detail</b></a></li>
       <li><a href="#haplotype">&nbsp;&nbsp;Haplotype/Diplotype</a></li>
@@ -61,7 +60,7 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
     ## Part 2: Pharmacogenomics Annotation
     part2_header = """
     <h2 id="summary">Pharmacogenomics Summary</h2>
-    <p>CPAT combines genotypes with PharmGKB's clinical annotations to summarise a patient's response to a specific drug across five dimensions, including <font color="#000"><b>toxicity</b></font>, <font color="#000"><b>dosage</b></font>, <font color="#000"><b>efficacy</b></font>, <font color="#000"><b>metabolism/PK</b></font> and <font color="#000"><b>other</b></font>. Response levels are indicated using <font color="#8E529A"><b>decreased</b></font>, <font color="#653F92"><b>moderate</b></font> and <font color="#44308d"><b>increased</b></font>.<br>CPAT labels results with variant-specific prescribing guidance in professional clinical guidelines or FDA-approved drug label annotations as <font color="#54A052"><b>Level A</b></font>, and otherwise as <font color="#3978B1"><b>Level B</b></font>.</p>
+    <p>CPAT combines genotypes with PharmGKB's clinical annotations to summarise a patient's response to a specific drug across four dimensions, including <font color="#000"><b>toxicity</b></font>, <font color="#000"><b>dosage</b></font>, <font color="#000"><b>efficacy</b></font>, <font color="#000"><b>metabolism/PK</b></font>. Response levels are indicated using <font color="#8E529A"><b>decreased</b></font>, <font color="#653F92"><b>moderate</b></font> and <font color="#44308d"><b>increased</b></font>.<br>CPAT labels results with variant-specific prescribing guidance in professional clinical guidelines or FDA-approved drug label annotations as <font color="#54A052"><b>Level A</b></font>, and otherwise as <font color="#3978B1"><b>Level B</b></font>.</p>
     """
     print(part2_header, file=f)
     
@@ -88,7 +87,7 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
     </table>
     """
     
-    categories = ['Toxicity', 'Dosage', 'Efficacy', 'Metabolism/PK', 'Other']
+    categories = ['Toxicity', 'Dosage', 'Efficacy', 'Metabolism/PK']
     fa = dict(zip(categories, ['fa-skull-crossbones', 'fa-pills', 'fa-vial-circle-check', 'fa-disease', 'fa-feather-pointed']))
     for cat in categories:
       print('<h3 id="%s"><i class="fa-solid %s"></i> %s</h3>' % (cat.lower(), fa[cat], cat), file=f)

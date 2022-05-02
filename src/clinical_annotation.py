@@ -8,7 +8,7 @@ from pybedtools import BedTool
 def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   
   ## Connected database
-  conn = sqlite3.connect("./assets/dbs/CPAT_v20220409.db")
+  conn = sqlite3.connect("./assets/dbs/CPAT_v20220421.db")
   cursor = conn.cursor()
   
   ## Find therapies, extract the table
@@ -23,7 +23,7 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   anno_ids_multi = []
   for gene in dic_diplotype.keys():
     #cpat_dip = set(dic_diplotype[gene])
-    for cpat_dip in dic_diplotype[gene]:
+    for cpat_dip in dic_diplotype[gene].split("; "):
       res_df = ann_df[ann_df.Gene == gene]
       for index, row in res_df.iterrows():
         if len(row.Alleles) == 2 and '*' not in row.Alleles:
@@ -31,7 +31,7 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
         else:
           genotype = set(row.Alleles.split("/"))
         # Compare the genotype in PharmGKB with CPAT predicted.
-        if genotype == set(cpat_dip):
+        if genotype == set(cpat_dip.split("/")):
           anno_ids_multi.append(row.ID)
   
   # Part 2: Single-locus based on rsIDs

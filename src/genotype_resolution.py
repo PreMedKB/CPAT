@@ -35,7 +35,7 @@ def resolution(race, germline_vcf, outdir):
   gene_list = ["ABCG2", "CACNA1S", "CFTR", "CYP2B6", "CYP2C8", "CYP2C19", "CYP2C9",# "CYP2D6",
                "CYP3A4", "CYP3A5", "CYP4F2", "DPYD", "G6PD", "MT-RNR1", "NUDT15",
                "RYR1", "SLCO1B1", "TPMT", "UGT1A1", "VKORC1"]
-  dic_diplotype = predict_diplotype.predict(fp, race, gene_list)
+  dic_diplotype = predict_diplotype.main(fp, race, gene_list)
   os.system('rm %s' % fp)
 
   ## Class 2: HLA genes
@@ -55,7 +55,12 @@ def resolution(race, germline_vcf, outdir):
     format = info[format_index].split(":")
     gt_index = format.index("GT")
     gt = info[-1].split(":")[gt_index]
-    genotype = predict_diplotype.phase_genotype(gt)
+    if re.findall('0', gt) == ['0', '0']:
+      genotype = 0
+    elif re.findall('0', gt) == ['0']:
+      genotype = 1
+    else:
+      genotype = 2
     if row[0].startswith('HLA') and genotype != 0:
       hla_subtypes.append(row[0])
     # If the variant was within the clinical relevant list, add it into dis_rs2gt

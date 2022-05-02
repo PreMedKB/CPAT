@@ -1,8 +1,0 @@
-Nucleotide change on cDNA (NM_004827.3)	421C>A
-Effect on protein (NP_001335914.1)	Q141K
-Position at NC_000004.12 (Homo sapiens chromosome 4, GRCh38.p2)	g.88131171G>T
-Position at NG_032067.2 (ABCG2 RefSeqGene)	g.105152C>A
-rsID	rs2231142
-ABCG2 Allele	
-G	G
-T	T
