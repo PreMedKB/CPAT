@@ -5,6 +5,7 @@ Annotation of pharmacogenomics relevant genotypes is a key component of clinical
 
 <img src="./assets/cpat_architecture.png" style="zoom:70%">
 </html>
+
 ## Status
 CPAT is still under _active development_.
 ## Prerequisite
