@@ -19,6 +19,8 @@ cd cpat
 python cpat.py -s sample_id -i germline_vcf -r population -o outdir
 ```
 
+## Examples
+The test VCF files of 1000 Genomes Project are stored in _./data/vcf_ directory, and the corresponding CPAT reports are stored in _./data/report_ directory.
 ## Input data
 ### VCF file
 As the diplotype definitions only match to the human genome _GRCh38_ and given its increasing generality, CPAT requires that the VCF file is based on _GRCh38_.
