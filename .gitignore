@@ -9,5 +9,4 @@ statistic.py
 test_88sample.py
 assets/css/*
 .DS_Store
-.gitignore
 .vscode

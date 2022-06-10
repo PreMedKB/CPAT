@@ -7,10 +7,18 @@ Annotation of pharmacogenomics relevant genotypes is a key component of clinical
 </p>
 
 ## Status
-CPAT is still under _active development_.
+CPAT is still under _active development_. In the current release, you should only use it to evaluate whether CPAT will compile and run properly on your system. All information in the CPAT report is interpreted directly from the uploaded VCF file. Users recognize that they are using CPAT at their own risk.
 ## Prerequisite
 - Bash
 - Python3 >= 3.6
+
+## Usage
+```Bash
+git clone https://github.com/premedkb/cpat.git
+cd cpat
+python cpat.py -s sample_id -i germline_vcf -r population -o outdir
+```
+
 ## Input data
 ### VCF file
 As the diplotype definitions only match to the human genome GRCh38 and given its increasing generality, CPAT requires that the VCF file is based on GRCh38.
