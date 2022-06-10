@@ -32,11 +32,13 @@ More information is available at https://www.pharmgkb.org/page/biogeographicalGr
 
 ## CPAT Models
 ### CPAT ranking model for diplotype inference
+The aim of genotype resolution is to extract the alleles of small variants and the diplotypes related to PGx from the user-submitted VCF file. CPAT processes the “GT” information to obtain all relevant single-locus genotypes. Afterwards, the genotypes of small variants will be passed to clinical annotation directly, while the genotypes related diplotype definitions will be passed to CPAT ranking model. The output diplotypes with the highest ranking will then be annotated.
 <p align="center">
 <img src="./assets/cpat_genotype_resolution.png" width="80%" />
 </p>
 
 ### CPAT annotation model for predicting drug response at individual level
+The aim of this component is to resolve the "drug-genotype-response-evidence" relationship. CPAT annotation model translates the literal PGx knowledge about genotypes into quantitative scores. The association between multiple genotypes and a single drug is then further translated into an individual-level association with this drug. Ultimately, individual responses to specific drugs are reported in terms of the strength of the response and the reliability of the evidence.
 <p align="center">
 <img src="./assets/cpat_clinical_annotation.png" width="60%" />
 </p>
