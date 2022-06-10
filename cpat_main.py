@@ -22,10 +22,10 @@ def main(argv):
     --version                       Show the version and exit.
     -h, --help                      Show this message and exit.
   '''
-
+  
   try:
     opts, args = getopt.getopt(
-      argv, "hvr:i:o", ["help", "version", "race=", "germline_vcf=", "outdir="])
+      argv, "hvr:i:o:s", ["help", "version", "race=", "germline_vcf=", "outdir=", "sample_id="])
   except getopt.GetoptError:
     print(help)
   for opt, arg in opts:
@@ -41,9 +41,15 @@ def main(argv):
       germline_vcf = arg
     elif opt in ("-o", "--output"):
       outdir = arg
+    elif opt in ("-s", "--sample_id"):
+      sample_id = arg
   
-  try{
-    dic_diplotype, dic_rs2gt, hla_subtypes = genotype_resolution.resolution(race, germline_vcf, outdir)
+  try:
+    print('  - Parsing PGx related genotypes ...')
+    dic_diplotype, dic_rs2gt, hla_subtypes = genotype_resolution.resolution(race, germline_vcf)
+    print('  - Annotating clinical information ...')
     pgx_summary, clinical_anno_table, dosing_guideline_table = clinical_annotation.annotation(dic_diplotype, dic_rs2gt, hla_subtypes)
-    pgx_report.report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdir, basename)
-  }
+    print('  - Generating CPAT report ...')
+    pgx_report.report(race, pgx_summary, dic_diplotype, clinical_anno_table, dosing_guideline_table, outdir, sample_id)
+  except:
+    print('Error appeared.')

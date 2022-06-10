@@ -3,15 +3,8 @@
 
 import time
 
-"""
-There three columns of the input dataframe:
-1. Gene Symbol
-2. Variant (rsID) or Haplotype
-3. Genotype or Diplotype
-"""
-
-def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdir, basename):
-  fp = "%s/%s.cpat.html" % (outdir, basename)
+def report(race, pgx_summary, dic_diplotype, clinical_anno_table, dosing_guideline_table, outdir, sample_id):
+  fp = "%s/%s.cpat.html" % (outdir, sample_id)
   with open(fp, 'w+') as f:
     ## Style
     style="""
@@ -31,9 +24,8 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
       <li><a href="#efficacy">&nbsp;&nbsp;Efficacy</a></li>
       <li><a href="#metabolism/pk">&nbsp;&nbsp;Metabolism/PK</a></li>
       <li><a href="#guideline"><b>Dosing Guideline</b></a></li>
-      <li><a href="#detail"><b>Genotype Detail</b></a></li>
-      <li><a href="#haplotype">&nbsp;&nbsp;Haplotype/Diplotype</a></li>
-      <li><a href="#snp/indel">&nbsp;&nbsp;SNP/Indel</a></li>
+      <li><a href="#diplotype"><b>Diplotype Detail</b></a></li>
+      <li><a href="#annotation"><b>PGx Annotation</b></a></li>
       <li><a href="#about"><b>About</b></a></li>
     </ul>
     <div style="margin-left:15rem;margin-right:0rem;padding:1px 16px;height:1000px;">
@@ -44,11 +36,11 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
     basic_info = """
     <h1 id="home">CPAT Report</h1>
     <blockquote>
-      <p><b>Report Time:</b> %s<br><b>Biogeographic Group:</b> %s</p>
+      <p><b>Sample ID:</b> %s<br><b>Biogeographic Group:</b> %s<br><b>Report Time:</b> %s</p>
     </blockquote>
     """
-    print(basic_info%(time.asctime(time.localtime(time.time())), race), file=f)
-
+    print(basic_info%(sample_id, race, time.asctime(time.localtime(time.time()))), file=f)
+    
     ## Part 1: Sort disclaimer
     disclaimer_short = """
     <div class="alert alert-info-yellow">
@@ -111,20 +103,18 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
                           html_input[3], html_input[4], html_input[5]), file=f)
       
     ## Part 3: Dosing Guideline
-    print('<h2 id="guideline">Dosing Guidelines</h2>', file=f)
+    print('<h2 id="guideline">Dosing Guideline</h2>', file=f)
     print('<p>CPAT integrates brief annotations of genotype-based dosing recommendations after PharmGKB processing. Original PGx-based drug dosing guidelines include the <a href="http://cpicpgx.org/">Clinical Pharmacogenetics Implementation Consortium</a> (CPIC), the <a href="https://www.knmp.nl/dossiers/farmacogenetica/">Royal Dutch Association for the Advancement of Pharmacy - Pharmacogenetics Working Group</a> (DPWG), the <a href="https://cpnds.ubc.ca/">Canadian Pharmacogenomics Network for Drug Safety</a> (CPNDS), the French National Network for Pharmacogenetics (RNPGx), The Australian and New Zealand consensus guidelines (AusNZ), the Spanish Pharmacogenetics and Pharmacogenomics Society (SEFF), the Cystic Fibrosis Foundation (CFF), the American College of Rheumatology.</p>', file=f)
-    # Drug
-    ## Detected variant or alleles
-    ### Dosing guidelines
+    # Drug - Detected variant or alleles - Dosing guidelines
     for drug in list(dosing_guideline_table.Drug.drop_duplicates()):
       print('<h3>%s</h3>' % drug, file=f)
       drug_sub = dosing_guideline_table[dosing_guideline_table.Drug == drug]
       for gene in list(drug_sub.Gene.drop_duplicates()):
-        print('<h4>%s</h4>' % gene, file=f)
         drug_by_gene = drug_sub[drug_sub.Gene == gene]
-        drug_by_gene['Report'] = drug_by_gene.Variant.str.cat(drug_by_gene.Alleles, sep=": ")
-        print('<p><font color="#444">Detected alleles: %s</font></p>' % "; ".join(list(drug_by_gene.Report.drop_duplicates())), file=f)
-        drug_guide = drug_by_gene[['DosingURL', 'DosingSource', 'DosingAnnotation']].drop_duplicates()
+        drug_by_gene.insert(drug_by_gene.shape[1], 'Report', drug_by_gene.Variant.str.cat(drug_by_gene.Alleles, sep=": "))
+        print('<p><font color="#444">Related Gene: %s<br>Detected Alleles: %s</font></p>' % (gene, "; ".join(list(drug_by_gene.Report.drop_duplicates()))), file=f)
+        drug_guide = drug_by_gene[['DosingURL', 'DosingSource', 'DosingAnnotation']].copy()
+        drug_guide = drug_guide.drop_duplicates()
         for index, row in drug_guide.iterrows():
           if row.DosingAnnotation.startswith('There are currently no'):
             #print('<div class="alert alert-info-yellow"><a href=%s target="_blank" style="color: #8a6d3b"><i class="fa-solid fa-circle-info"></a></i><b> %s: </b>%s</div>' % (row.DosingURL, row.DosingSource, row.DosingAnnotation), file=f)
@@ -132,22 +122,25 @@ def report(race, pgx_summary, clinical_anno_table, dosing_guideline_table, outdi
           else:
             print('<div class="alert alert-info-blue"><a href=%s target="_blank"><i class="fa-solid fa-circle-info"></a></i><b> %s: </b>%s</div>' % (row.DosingURL, row.DosingSource, row.DosingAnnotation), file=f)
     
-    ## Part 4: Genotype Details
-    print('<h2 id="detail">Genotype Details</h2>', file=f)
-    print('<h3 id="haplotype">Haplotype/Diplotype predicted by CPAT</h3>', file=f)
-    print('<p>This subsection provides CPAT predicted haplotypes based on the VCF calls, the haplotype definition table, and the haplotype population frequency table. PharmGKB and CPIC together summarized pharmacogenomic genes with explicit star(*) or named allele information are involved, specifically ABCG2, CACNA1S, CFTR, CYP2B6, CYP2C8, CYP2C9, CYP2C19, CYP3A4, CYP3A5, CYP4F2, DPYD, G6PD, MT-RNR1, NUDT15, RYR1, SLCO1B1, TPMT, UGT1A1, VKORC1.</p>', file=f)
-    detail1 = clinical_anno_table[clinical_anno_table.Class == 'Diplotype'].drop(columns=['Class']).reset_index(drop = True)
-    header = '<table id="customers" border="1" cellspacing="0">\n<tr><th></th><th>Gene</th><th>Variant</th><th>Alleles</th><th>Drug</th><th>Evidence</th><th>Category</th><th>Function</th></tr>'
-    for index, row in detail1.iterrows():
-      header = header + '\n<tr><td>%s <a href=%s target="_blank" style="color: #ffb30e"><i class="fa-solid fa-up-right-from-square"></i></a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (index, row.URL, row.Gene, row.Variant, row.Alleles, row.Drug, row.EvidenceLevel, row.PhenotypeCategory, row.Function)
-    header = header + '\n</table>'
-    print(header, file=f)
+    ## Part 4: Diplotype Detail
+    print('<h2 id="diplotype">Diplotype Detail</h2>', file=f)
+    print('<p>CPAT predicts the diplotypes for PGx genes with star (*) or named allele information, which include ABCG2, CACNA1S, CFTR, CYP2B6, CYP2C8, CYP2C9, CYP2C19, CYP3A4, CYP3A5, CYP4F2, DPYD, G6PD, MT-NR1, NUDT15, RYR1, SLCO1B1, TPMT, UGT1A1, and VKORC1. CPAT assumes that no variation occurs for the missing positions in the submitted VCFs, and the final inferred diplotypes are a composite ranking result.</p>', file=f)
+    for gene in list(dic_diplotype.keys()):
+      print('<h3>%s: %s</h3>' % (gene, dic_diplotype[gene]['step2_res']), file=f)
+      gene_detail = dic_diplotype[gene]['detail']
+      header = '<table id="customers" border="1" cellspacing="0">\n<tr><th>Position</th><th>rsID</th><th>Effect on Protein</th><th>Definition of Alleles</th><th>Detected Alleles</th></tr>'
+      for pos_res in gene_detail:
+        position = pos_res[0] + ':' + pos_res[1] + ':' + pos_res[2]
+        header = header + '\n<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (position, pos_res[3], pos_res[4], pos_res[5], pos_res[6])
+      header = header + '\n</table>'
+      print(header, file=f)
     
-    print('<h3 id="snp/indel">SNPs/Indels called by VCF</h3>', file=f)
-    print('<p>This subsection depends on the VCF calls for the query positions provided. CPAT does not assume any reference calls for missing positions in the submitted VCF; all missing query positions are not considered in the allele determination process.</p>', file=f)
-    detail2 = clinical_anno_table[clinical_anno_table.Class == 'Single'].drop(columns=['Class']).reset_index(drop = True)
+    ## Part 5: PGx Annotation
+    print('<h2 id="annotation">PGx Annotation</h2>', file=f)
+    print('<p>CPAT annotates PGx-related single-locus genotypes and predicted diplotypes using the knowledge from PharmGKB, which are the basis for calculating the PGx summary results.</p>', file=f)
+    detail = clinical_anno_table.drop(columns=['Class']).reset_index(drop = True)
     header = '<table id="customers" border="1" cellspacing="0">\n<tr><th></th><th>Gene</th><th>Variant</th><th>Alleles</th><th>Drug</th><th>Evidence</th><th>Category</th><th>Function</th></tr>'
-    for index, row in detail2.iterrows():
+    for index, row in detail.iterrows():
       header = header + '\n<tr><td>%s <a href=%s target="_blank" style="color: #ffb30e"><i class="fa-solid fa-up-right-from-square"></i></a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (index, row.URL, row.Gene, row.Variant, row.Alleles, row.Drug, row.EvidenceLevel, row.PhenotypeCategory, row.Function)
     header = header + '\n</table>'
     print(header, file=f)

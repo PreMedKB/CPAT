@@ -3,32 +3,21 @@ import numpy as np
 import re, itertools, json, os
 
 
-def parse_input_allele(vcf_file, info):
+def parse_input_allele(vcf_df, info):
   hap_define = info['haplotype_definition']
+  hap_define_display = info['haplotype_definition_display']
   ref_hap = info['reference_haplotype']
   
-  ## Read input VCF
-  with open(vcf_file, "r", encoding="utf-8") as file:
-    lines = file.readlines()
-  
-  lines_info = []
-  for line in lines:
-    if line.startswith('##') is False:
-      lines_info.append(line.strip().split('\t'))
-  
-  vcf_df = pd.DataFrame(lines_info)
-  vcf_df.columns = vcf_df.iloc[0]
-  vcf_df = vcf_df.iloc[1:,]
-  vcf_df['#CHROM'] = vcf_df['#CHROM'].map(lambda x: re.sub('chr|Chr|CHR', '', x)).astype('str')
-  vcf_df = vcf_df[vcf_df['#CHROM'] == info['chrom']]
-  vcf_df['POS'] = vcf_df['POS'].astype('int')
+  vcf_df_all = vcf_df.copy()
+  vcf_df = vcf_df_all[vcf_df_all['#CHROM'] == info['chrom']]
   cols = vcf_df.columns.to_list()
   
-  vcf_alleles = {}
+  vcf_alleles = {}; vcf_alleles_display = {}
   hap_pos = list(hap_define[ref_hap].keys())
   for source_pos in hap_pos:
     # ref_hap_base, Only two loci of CYP2D6 gene will have more than one ref_hap_base
     ref_hap_base = hap_define[ref_hap][source_pos]
+    ref_hap_base_display = hap_define_display[ref_hap][source_pos].split(':')[-1]
     
     # Get all possible bases at this position
     defined = []
@@ -51,6 +40,7 @@ def parse_input_allele(vcf_file, info):
     mat = vcf_df[(vcf_df['POS'].isin(pos)) | (vcf_df['ID'] == pos_rs[1])]
     if mat.empty:
       vcf_alleles[source_pos] = (ref_hap_base, ref_hap_base)
+      vcf_alleles_display[source_pos] = 'Missing'
     else:
       is_wild_type = 1
       for index, row in mat.iterrows():
@@ -60,26 +50,26 @@ def parse_input_allele(vcf_file, info):
         if re.findall('0', gt) == ['0', '0']:
           continue
         else:
-          ## Only process the first line which genotype is not wild type
-          ## Therefore, the end of 'else' is break
-          tuple_res = ()
+          ## Only process the first line which genotype is not wild type.
+          ## !!! Therefore, the end of 'else' is break
+          tuple_res = (); tuple_res_display = ()
           is_wild_type = 0
           ref = row[cols.index("REF")]
           alts = row[cols.index("ALT")].split(",")
           opts = [ref]; opts.extend(alts)
           gts = re.split('/|\|', gt)
           if len(gts) == 1: # chrX
-            #print('GT info is not standard!'); print(gts, row.POS)
             gts.append(gts[0])
           for gt_index in gts:
-            base = None
+            base = None; base_raw = None
             if gt_index == '0':
-              base = ref_hap_base
+              base = ref_hap_base; base_raw = ref_hap_base_display
             else:
               alt = opts[int(gt_index)]
               # SNP #
               if len(alt) == len(ref):
                 base = alt
+                base_raw = alt
               ### ! If alt was not match the definition, try to combine with the following position base and test again
               # Del #
               elif len(alt) < len(ref):
@@ -106,11 +96,11 @@ def parse_input_allele(vcf_file, info):
                         base = 'del' + modd * int((matched_span[1] - matched_span[0])/len(modd) + 1)
                       else:
                         base = 'del' + modd * int((matched_span[1] - matched_span[0])/len(modd))
+                base_raw = base
                 if base not in defined:
                   print('Warning in Del!'); print(row.T); print(pos); print(base)
               # Ins #
               elif len(alt) > len(ref):
-                # if alt[0:len(ref)] == ref:
                 base = 'ins%s' % alt[len(ref):]
                 if base not in defined:
                   pos_of_mat = mat.index.to_list()
@@ -132,7 +122,6 @@ def parse_input_allele(vcf_file, info):
                           modd = 'C'; flag = 1; break
                     else:
                       modd = ref_hap_base[0].replace('ref', '')
-                    print(modd, base)
                     if re.search(modd, base):
                       matched_span = re.search(modd, base).span()
                       if modd.startswith(base[matched_span[1]:]):
@@ -141,19 +130,20 @@ def parse_input_allele(vcf_file, info):
                         base = 'ins' + modd * int((matched_span[1] - matched_span[0])/len(modd))
                     if flag == 1:
                       base = 'del' + base + 'C'
+                base_raw = alt
                 if base not in defined:
-                  print(base)
-                  print('Warning in Ins or Dup!'); print(row.T); print(pos)
-                # else:
-                #   print('Warning in Ins or Dup!'); print(row.T); print(pos)
+                  print('Warning in Ins or Dup!'); print(row.T); print(pos); print(base)
             ## Add the result into tuple_res
             tuple_res = tuple_res + (base,)
+            tuple_res_display = tuple_res_display + (base_raw,)
           break
       
       if is_wild_type == 1:
         vcf_alleles[source_pos] = (ref_hap_base, ref_hap_base)
+        vcf_alleles_display[source_pos] = ref_hap_base_display + '|' + ref_hap_base_display
       else:
         vcf_alleles[source_pos] = tuple_res
+        vcf_alleles_display[source_pos] = ';'.join(['|'.join(res) for res in list(zip(tuple_res_display[0], tuple_res_display[1]))])
         if None in tuple_res:
           print('Warning! None was reported.')
   
@@ -168,7 +158,7 @@ def parse_input_allele(vcf_file, info):
         tuple_res = tuple_res + (base,)
     fine_vcf_alleles[source_pos] = tuple_res
   
-  return(fine_vcf_alleles)
+  return(fine_vcf_alleles, vcf_alleles_display)
 
 
 def predict_diplotype(vcf_alleles, info, race):
@@ -225,18 +215,15 @@ def predict_diplotype(vcf_alleles, info, race):
       difference_step1[pos_rs] = max(score1) + min(score2)
       # print(pos_rs, score1, score2)
     if min(difference_step1.values()) > -99:
-    # if '*80' in dip:
-    #   pass
-    # else:
       candidate['%s/%s' % (dip[0], dip[1])] = difference_step1
   
   # print(candidate.keys())
   # Whether is 0
-  extract_match_res = []
+  exact_match_res = []
   for dip in candidate.keys():
     # print(dip, candidate[dip].values())
     if set(candidate[dip].values()) == {0}:
-      extract_match_res.append(dip)
+      exact_match_res.append(dip)
   
   # 1. select diplotypes which 1st rank is max
   rank_step1 = {}
@@ -252,78 +239,38 @@ def predict_diplotype(vcf_alleles, info, race):
     rank_step2[dip] = dip_freq[dip][race]
   uniq_freq = sorted(set(rank_step2.values()))
   final_rank_res = [k for k,v in rank_step2.items() if v == max(uniq_freq)]#; final_rank_res
-  return("; ".join(extract_match_res), "; ".join(rank_step1_res), "; ".join(final_rank_res))
+  return("; ".join(exact_match_res), "; ".join(rank_step1_res), "; ".join(final_rank_res))
 
 
-def main(vcf_file, race, gene_list):
+def predict(vcf_df, race, gene_list):
   cpat_dip_base = json.loads(open("./assets/cpat_dip_base.json").read())
-  dic_gene2diplotype = {}
+  dic_diplotype = {}
+  dic_diplotype_detail = {}
   for gene in gene_list:
-    # print(gene)
     info = cpat_dip_base[gene]
-    vcf_alleles = parse_input_allele(vcf_file, info)
-    extract_match_res, rank_step1_res, final_rank_res = predict_diplotype(vcf_alleles, info, race)
-    dic_gene2diplotype[gene] = {'extract_match_res': extract_match_res, 'rank_step1_res': rank_step1_res, 'final_rank_res': final_rank_res}
-    #dic_gene2diplotype[gene] = final_rank_res
-  
-  return(dic_gene2diplotype)
-
-
-
-
-
-
-########################################################################
-#######################################################################
-cpat_dip_base = json.loads(open("./assets/cpat_dip_base.json").read())
-gene_list = ["ABCG2", "CACNA1S", "CFTR", "CYP2B6", "CYP2C8", "CYP2C9", "CYP2C19", "CYP2D6",\
-             "CYP3A4", "CYP3A5", "CYP4F2", "DPYD", "G6PD", "MT-RNR1", "NUDT15", "IFNL3", \
-             "RYR1", "SLCO1B1", "TPMT", "UGT1A1", "VKORC1"]
-########### Test the accuracy
-pharmgkb_100genome = {'AFR': 'African American/Afro-Caribbean', 'AMR': 'Latino', 'EAS': 'East Asian', 'EUR': 'European'}
-metadata = pd.read_csv('../cpat_data/test/population.txt', sep='\t')
-test_vcfs = os.listdir('../cpat_data/test/88samples/')
-extract_match_res = {}
-rank_step1_res = {}
-final_rank_res = {}
-n = 0
-# test_vcfs = ['NA18945.cpat.vcf']
-gene_list = ['CYP2D6']
-for vcf in test_vcfs:
-  if vcf.endswith('.vcf'):
-    n = n+1
-    print("%i/88" % n)
-    vcf_file = '../cpat_data/test/88samples/%s' % vcf
-    # Get sample and race info
-    sample = vcf.split('.')[0]
-    race = metadata.loc[metadata['Get-RM 137 Samples']==sample, 'Superpopulation'].to_list()[0]
-    race = pharmgkb_100genome[race]
-    print(sample, race)
-    res = main(vcf_file, race, gene_list)
-    print(res)
-    # Extract match res
-    extract_match_res[sample] = {}
-    for gene in gene_list:
-      extract_match_res[sample][gene] = res[gene]['extract_match_res']
-    # Step1 rank res
-    rank_step1_res[sample] = {}
-    for gene in gene_list:
-      rank_step1_res[sample][gene] = res[gene]['rank_step1_res']
-    # Final rank res
-    final_rank_res[sample] = {}
-    for gene in gene_list:
-      final_rank_res[sample][gene] = res[gene]['final_rank_res']
-
-
-extract_df = pd.DataFrame(extract_match_res).T
-step1_df = pd.DataFrame(rank_step1_res).T
-final_df = pd.DataFrame(final_rank_res).T
-
-## Merge the above dfs into one df
-extract_df.columns = ['%s.raw' % i for i in extract_df.columns]
-step1_df.columns = ['%s.step1' % i for i in step1_df.columns]
-final_df.columns = ['%s.step2' % i for i in final_df.columns]
-df = pd.concat([extract_df, step1_df, final_df], axis=1)
-df[sorted(df.columns)].to_csv('../manuscript/diplotype_concordance/detail_merge_v20220422_cyp2d6.txt', sep='\t')
-
-
+    hap_define_display = info['haplotype_definition_display']
+    vcf_alleles, vcf_alleles_display = parse_input_allele(vcf_df, info)
+    exact_match_res, rank_step1_res, final_rank_res = predict_diplotype(vcf_alleles, info, race)
+    
+    if final_rank_res == '':
+      final_rank_res = '-'
+    
+    # Detail of diplotypes
+    if final_rank_res != '-':
+      haplotypes = set(re.split('; |/', final_rank_res))
+    else:
+      haplotypes = [info['reference_haplotype']]
+    diplotype_details = []
+    for source_pos in vcf_alleles_display.keys():
+      detected_allele = vcf_alleles_display[source_pos]
+      base_all = []
+      for hap in haplotypes:
+        chrom, nc, pos, rs, pc, base = hap_define_display[hap][source_pos].split(':')
+        base_all.append(hap + ':' + base)
+      identified_allele = '; '.join(base_all)
+      diplotype_details.append((chrom, nc, pos, rs, pc, identified_allele, detected_allele))
+    
+    # Collect the results
+    dic_diplotype[gene] = {'exact_res': exact_match_res, 'step1_res': rank_step1_res, 'step2_res': final_rank_res, 'detail': diplotype_details}
+    
+  return(dic_diplotype)

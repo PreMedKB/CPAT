@@ -1,5 +1,4 @@
 import sqlite3
-from matplotlib.pyplot import axis
 import pandas as pd
 import numpy as np
 from pybedtools import BedTool
@@ -22,8 +21,7 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   # Part 1: Diplotype and haplotypes
   anno_ids_multi = []
   for gene in dic_diplotype.keys():
-    #cpat_dip = set(dic_diplotype[gene])
-    for cpat_dip in dic_diplotype[gene].split("; "):
+    for cpat_dip in dic_diplotype[gene]['step2_res'].split("; "):
       res_df = ann_df[ann_df.Gene == gene]
       for index, row in res_df.iterrows():
         if len(row.Alleles) == 2 and '*' not in row.Alleles:
@@ -78,7 +76,7 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   
   # Output table 1: Original clinical annotation of PharmGKB
   clinical_anno_table = res_df[['Gene', 'Variant', 'Drug', 'Phenotypes', 'EvidenceLevel', 'Alleles', 'PhenotypeCategory', 'Annotation', 'Function', 'URL', 'Pediatric', 'Class']]
-
+  
   # Summary Clinical Dosing Guideline
   dosing = cursor.execute("SELECT Source, Annotation, RelatedGeneID, RelatedDrugID, URL FROM ClinDosingGuideline;")
   dosing = cursor.fetchall()
@@ -109,7 +107,7 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
     cat_df = pd.merge(cat_df, level_a, on=['GeneID', 'DrugID'], how='left')
     # cat_df['Drug+Gene'] = cat_df.Drug.str.cat(cat_df.Gene, sep='+') #cat_df.groupby("Drug")['Gene'].agg(lambda x: x.str.cat(sep=';'))
     # Calculating cat_pgx
-    cat_pgx = cat_df.groupby("Drug")['ResponseScore', 'EvidenceScore', 'A'].mean()
+    cat_pgx = cat_df.groupby("Drug")[['ResponseScore', 'EvidenceScore', 'A']].mean()
     cat_pgx['PhenotypeCategory'] = cat
     cat_pgx['EvidenceLevel'] = ''; cat_pgx['Response'] = ''
     for index, row in cat_pgx.iterrows():
