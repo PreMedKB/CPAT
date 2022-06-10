@@ -18,13 +18,13 @@ As the diplotype definitions only match to the human genome GRCh38 and given its
 CPAT directly uses the NGS-derived VCF file as input and assumes that it has undergone quality control. Therefore, if the VCF file is of poor quality, inaccurate genotype resolution results and inappropriate clinical recommendations may be reported.
 
 ### Population
-There are nine biogeographic groups, i.e., African American/Afro-Caribbean, American, Central/South Asian, East Asian, European, Latino, Near Eastern, Oceanian, Sub-Saharan African.
+There are nine biogeographic groups: African American/Afro-Caribbean, American, Central/South Asian, East Asian, European, Latino, Near Eastern, Oceanian, Sub-Saharan African.
 
 
 ## CPAT Models
 ### CPAT ranking model for diplotype inference
 <p align="center">
-<img src="./assets/cpat_genotype_resolution.png" width="100%" />
+<img src="./assets/cpat_genotype_resolution.png" width="90%" />
 </p>
 
 ### CPAT annotation model for predicting drug response at individual level
