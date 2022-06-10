@@ -21,18 +21,19 @@ python cpat.py -s sample_id -i germline_vcf -r population -o outdir
 
 ## Input data
 ### VCF file
-As the diplotype definitions only match to the human genome GRCh38 and given its increasing generality, CPAT requires that the VCF file is based on GRCh38.
+As the diplotype definitions only match to the human genome _GRCh38_ and given its increasing generality, CPAT requires that the VCF file is based on _GRCh38_.
 
 CPAT directly uses the NGS-derived VCF file as input and assumes that it has undergone quality control. Therefore, if the VCF file is of poor quality, inaccurate genotype resolution results and inappropriate clinical recommendations may be reported.
 
 ### Population
-There are nine biogeographic groups: African American/Afro-Caribbean, American, Central/South Asian, East Asian, European, Latino, Near Eastern, Oceanian, Sub-Saharan African.
+There are nine biogeographic groups provided by CPAT: African American/Afro-Caribbean, American, Central/South Asian, East Asian, European, Latino, Near Eastern, Oceanian, Sub-Saharan African.
 
+More information is available at https://www.pharmgkb.org/page/biogeographicalGroups.
 
 ## CPAT Models
 ### CPAT ranking model for diplotype inference
 <p align="center">
-<img src="./assets/cpat_genotype_resolution.png" width="90%" />
+<img src="./assets/cpat_genotype_resolution.png" width="80%" />
 </p>
 
 ### CPAT annotation model for predicting drug response at individual level
