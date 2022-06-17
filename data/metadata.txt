@@ -1,0 +1,138 @@
+Get-RM 137 Samples	Included in CPAT	Transformed Biogeographic Group	Abbreviation	1000 Genomes Population	1000 Genomes Superpopulation
+HG00276	Y	European	EUR	FIN	EUR
+HG00436	Y	East Asian	EAS	CHS	EAS
+HG00589	Y	East Asian	EAS	CHS	EAS
+HG01190	Y	Latino	LAT	PUR	AMR
+NA06991	Y	European	EUR	CEU	EUR
+NA06993	Y	European	EUR	CEU	EUR
+NA07000	Y	European	EUR	CEU	EUR
+NA07019	Y	European	EUR	CEU	EUR
+NA07029	Y	European	EUR	CEU	EUR
+NA07048	Y	European	EUR	CEU	EUR
+NA07055	Y	European	EUR	CEU	EUR
+NA07056	Y	European	EUR	CEU	EUR
+NA07348	Y	European	EUR	CEU	EUR
+NA07357	Y	European	EUR	CEU	EUR
+NA07439	N	-	-	-	-
+NA10831	Y	European	EUR	CEU	EUR
+NA10838	Y	European	EUR	CEU	EUR
+NA10846	Y	European	EUR	CEU	EUR
+NA10847	Y	European	EUR	CEU	EUR
+NA10851	Y	European	EUR	CEU	EUR
+NA10854	Y	European	EUR	CEU	EUR
+NA10855	Y	European	EUR	CEU	EUR
+NA10856	Y	European	EUR	CEU	EUR
+NA10859	Y	European	EUR	CEU	EUR
+NA10865	Y	European	EUR	CEU	EUR
+NA11832	Y	European	EUR	CEU	EUR
+NA11839	Y	European	EUR	CEU	EUR
+NA11881	Y	European	EUR	CEU	EUR
+NA11993	Y	European	EUR	CEU	EUR
+NA12003	Y	European	EUR	CEU	EUR
+NA12006	Y	European	EUR	CEU	EUR
+NA12145	Y	European	EUR	CEU	EUR
+NA12156	Y	European	EUR	CEU	EUR
+NA12236	Y	European	EUR	CEU	EUR
+NA12336	Y	European	EUR	CEU	EUR
+NA12375	N	-	-	CEU	EUR
+NA12717	Y	European	EUR	CEU	EUR
+NA12753	Y	European	EUR	CEU	EUR
+NA12813	Y	European	EUR	CEU	EUR
+NA12815	Y	European	EUR	CEU	EUR
+NA12873	Y	European	EUR	CEU	EUR
+NA12878	Y	European	EUR	CEU	EUR
+NA12892	Y	European	EUR	CEU	EUR
+NA15245	N	-	-	-	-
+NA17012	N	-	-	-	-
+NA17061	N	-	-	-	-
+NA17074	N	-	-	-	-
+NA17102	N	-	-	-	-
+NA17204	N	-	-	-	-
+NA17227	N	-	-	-	-
+NA17234	N	-	-	-	-
+NA17235	N	-	-	-	-
+NA17244	N	-	-	-	-
+NA17288	N	-	-	-	-
+NA17290	N	-	-	-	-
+NA17448	N	-	-	-	-
+NA17454	N	-	-	-	-
+NA17641	N	-	-	-	-
+NA17642	N	-	-	-	-
+NA17657	N	-	-	-	-
+NA17658	N	-	-	-	-
+NA17660	N	-	-	-	-
+NA17673	N	-	-	-	-
+NA17679	N	-	-	-	-
+NA17702	N	-	-	-	-
+NA18484	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA18509	N	-	-	YRI	AFR
+NA18518	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA18519	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA18524	N	-	-	CHB	EAS
+NA18526	Y	East Asian	EAS	CHB	EAS
+NA18540	N	-	-	CHB	EAS
+NA18544	Y	East Asian	EAS	CHB	EAS
+NA18552	Y	East Asian	EAS	CHB	EAS
+NA18563	Y	East Asian	EAS	CHB	EAS
+NA18564	Y	East Asian	EAS	CHB	EAS
+NA18565	Y	East Asian	EAS	CHB	EAS
+NA18572	Y	East Asian	EAS	CHB	EAS
+NA18617	Y	East Asian	EAS	CHB	EAS
+NA18855	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA18861	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA18868	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA18873	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA18942	Y	East Asian	EAS	JPT	EAS
+NA18945	Y	East Asian	EAS	JPT	EAS
+NA18952	Y	East Asian	EAS	JPT	EAS
+NA18959	Y	East Asian	EAS	JPT	EAS
+NA18966	Y	East Asian	EAS	JPT	EAS
+NA18973	Y	East Asian	EAS	JPT	EAS
+NA18980	Y	East Asian	EAS	JPT	EAS
+NA18992	Y	East Asian	EAS	JPT	EAS
+NA19003	Y	East Asian	EAS	JPT	EAS
+NA19007	Y	East Asian	EAS	JPT	EAS
+NA19035	Y	African American/Afro-Caribbean	AAC	LWK	AFR
+NA19095	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA19109	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA19122	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA19143	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA19147	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA19174	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA19176	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA19178	N	-	-	-	-
+NA19207	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA19213	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA19226	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA19238	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA19239	Y	African American/Afro-Caribbean	AAC	YRI	AFR
+NA19444	N	-	-	LWK	AFR
+NA19700	Y	African American/Afro-Caribbean	AAC	ASW	AFR
+NA19785	Y	Latino	LAT	MXL	AMR
+NA19789	Y	Latino	LAT	MXL	AMR
+NA19819	Y	African American/Afro-Caribbean	AAC	ASW	AFR
+NA19908	Y	African American/Afro-Caribbean	AAC	ASW	AFR
+NA19917	Y	African American/Afro-Caribbean	AAC	ASW	AFR
+NA19920	Y	African American/Afro-Caribbean	AAC	ASW	AFR
+NA20296	Y	African American/Afro-Caribbean	AAC	ASW	AFR
+NA20509	Y	European	EUR	TSI	EUR
+NA21781	N	-	-	-	-
+NA23090	N	-	-	-	-
+NA23093	N	-	-	-	-
+NA23246	N	-	-	-	-
+NA23275	N	-	-	-	-
+NA23296	N	-	-	-	-
+NA23297	N	-	-	-	-
+NA23313	N	-	-	-	-
+NA23348	N	-	-	-	-
+NA23405	N	-	-	-	-
+NA23872	N	-	-	-	-
+NA23873	N	-	-	-	-
+NA23874	N	-	-	-	-
+NA23877	N	-	-	-	-
+NA23878	N	-	-	-	-
+NA23881	N	-	-	-	-
+NA24008	N	-	-	-	-
+NA24009	N	-	-	-	-
+NA24027	N	-	-	-	-
+NA24217	N	-	-	-	-

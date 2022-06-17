@@ -111,7 +111,7 @@ def report(race, pgx_summary, dic_diplotype, clinical_anno_table, dosing_guideli
       drug_sub = dosing_guideline_table[dosing_guideline_table.Drug == drug]
       for gene in list(drug_sub.Gene.drop_duplicates()):
         drug_by_gene = drug_sub[drug_sub.Gene == gene]
-        drug_by_gene.insert(drug_by_gene.shape[1], 'Report', drug_by_gene.Variant.str.cat(drug_by_gene.Alleles, sep=": "))
+        # drug_by_gene.insert(drug_by_gene.shape[1], 'Report', drug_by_gene.Variant.str.cat(drug_by_gene.Alleles, sep=": "))
         print('<p><font color="#444">Related Gene: %s<br>Detected Alleles: %s</font></p>' % (gene, "; ".join(list(drug_by_gene.Report.drop_duplicates()))), file=f)
         drug_guide = drug_by_gene[['DosingURL', 'DosingSource', 'DosingAnnotation']].copy()
         drug_guide = drug_guide.drop_duplicates()
@@ -141,7 +141,7 @@ def report(race, pgx_summary, dic_diplotype, clinical_anno_table, dosing_guideli
     detail = clinical_anno_table.drop(columns=['Class']).reset_index(drop = True)
     header = '<table id="customers" border="1" cellspacing="0">\n<tr><th></th><th>Gene</th><th>Variant</th><th>Alleles</th><th>Drug</th><th>Evidence</th><th>Category</th><th>Function</th></tr>'
     for index, row in detail.iterrows():
-      header = header + '\n<tr><td>%s <a href=%s target="_blank" style="color: #ffb30e"><i class="fa-solid fa-up-right-from-square"></i></a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (index, row.URL, row.Gene, row.Variant, row.Alleles, row.Drug, row.EvidenceLevel, row.PhenotypeCategory, row.Function)
+      header = header + '\n<tr><td>%s <a href=%s target="_blank" style="color: #ffb30e"><i class="fa-solid fa-up-right-from-square"></i></a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (index+1, row.URL, row.Gene, row.Variant, row.Alleles, row.Drug, row.EvidenceLevel, row.PhenotypeCategory, row.Function)
     header = header + '\n</table>'
     print(header, file=f)
     

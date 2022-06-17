@@ -22,9 +22,13 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   anno_ids_multi = []
   for gene in dic_diplotype.keys():
     for cpat_dip in dic_diplotype[gene]['step2_res'].split("; "):
-      res_df = ann_df[ann_df.Gene == gene]
+      # For genes like VKORC1, IFNL3, ABCG2, CACNA1S...
+      if len(dic_diplotype[gene]['detail']) == 1:
+        res_df = ann_df[(ann_df.Gene == gene) & (ann_df.Variant == dic_diplotype[gene]['detail'][0][3])]
+      else:
+        res_df = ann_df[ann_df.Gene == gene]
       for index, row in res_df.iterrows():
-        if len(row.Alleles) == 2 and '*' not in row.Alleles:
+        if len(dic_diplotype[gene]['detail']) == 1:
           genotype = {row.Alleles[0], row.Alleles[1]}
         else:
           genotype = set(row.Alleles.split("/"))
@@ -55,7 +59,7 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   res1 = cursor.fetchall()
   res1_df = pd.DataFrame(res1, columns=["Gene", "Variant", "Drug", "Phenotypes", "EvidenceLevel", "EvidenceScore", "PhenotypeCategoryID", "Alleles", "Annotation", "Function", "URL", "Pediatric", "GeneID", "DrugID"])
   res1_df['Class'] = 'Diplotype'
-
+  
   res2 = cursor.execute("SELECT Gene, VariantOrHaplotype, Drug, Phenotypes, EvidenceLevel, Score, PhenotypeCategoryID, GenotypeOrAllele, Annotation, Function, URL, SpecialtyPopulation, GeneID, DrugID FROM ClinAnn WHERE EvidenceLevel != 3 AND EvidenceLevel != 4 AND ID IN (%s);" % ','.join([str(i) for i in anno_ids_single]))
   res2 = cursor.fetchall()
   res2_df = pd.DataFrame(res2, columns=["Gene", "Variant", "Drug", "Phenotypes", "EvidenceLevel", "EvidenceScore", "PhenotypeCategoryID", "Alleles", "Annotation", "Function", "URL", "Pediatric", "GeneID", "DrugID"])
@@ -75,20 +79,29 @@ def annotation(dic_diplotype, dic_rs2gt, hla_subtypes):
   res_df.EvidenceScore = res_df.EvidenceScore.astype('float')
   
   # Output table 1: Original clinical annotation of PharmGKB
-  clinical_anno_table = res_df[['Gene', 'Variant', 'Drug', 'Phenotypes', 'EvidenceLevel', 'Alleles', 'PhenotypeCategory', 'Annotation', 'Function', 'URL', 'Pediatric', 'Class']]
+  clinical_anno_table = res_df[['Gene', 'Variant', 'Drug', 'Phenotypes', 'EvidenceLevel', 'Alleles', 'PhenotypeCategory', 'Annotation', 'Function', 'URL', 'Pediatric', 'Class']].copy()
+  for index, row in clinical_anno_table.iterrows():
+    if row.Class != 'Single' and row.Variant.startswith('rs') == False:
+      clinical_anno_table.loc[index, 'Variant'] = row.Alleles
   
   # Summary Clinical Dosing Guideline
   dosing = cursor.execute("SELECT Source, Annotation, RelatedGeneID, RelatedDrugID, URL FROM ClinDosingGuideline;")
   dosing = cursor.fetchall()
   dosing = pd.DataFrame(dosing, columns=["DosingSource", "DosingAnnotation", "GeneID", "DrugID", "DosingURL"])
-  dosing_df = pd.merge(res_df[['Gene', 'Variant', 'Alleles', 'Drug', 'GeneID', 'DrugID']].drop_duplicates(), dosing, on=["GeneID", "DrugID"])
+  dosing_df = pd.merge(res_df[['Gene', 'Variant', 'Alleles', 'Drug', 'GeneID', 'DrugID', 'Class']].drop_duplicates(), dosing, on=["GeneID", "DrugID"])
   # Merge with drug table to get PAID
   drug = cursor.execute("SELECT ID, PAID FROM Drug;")
   drug = cursor.fetchall()
   drug = pd.DataFrame(drug, columns=["DrugID", "DrugPAID"])
   dosing_df = pd.merge(dosing_df, drug, on=["DrugID"]).drop(columns=["GeneID", "DrugID"])
   # Output table 2: Dosing Guidelines
-  dosing_guideline_table = dosing_df#[['Gene', 'Variant', 'Drug', 'DrugPAID', 'DosingSource', 'DosingAnnotation', 'DosingURL']]
+  dosing_guideline_table = dosing_df.copy()
+  dosing_guideline_table.insert(dosing_guideline_table.shape[1], 'Report', '')
+  for index, row in dosing_guideline_table.iterrows():
+    if row.Class == 'Single' or row.Variant.startswith('rs'):
+      dosing_guideline_table.loc[index, 'Report'] = row.Variant + '-' + row.Alleles
+    else:
+      dosing_guideline_table.loc[index, 'Report'] = row.Alleles
   
   ## Level A
   a1 = cursor.execute("SELECT DISTINCT GeneID, DrugID from ClinAnn WHERE EvidenceLevel = '1A';")
